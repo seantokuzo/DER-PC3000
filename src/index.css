@@ -1,5 +1,5 @@
 :root {
-
+  --background: #f7f1e9;
 }
 
 * {
@@ -8,5 +8,15 @@
 
 body {
   margin: 0;
+  background: var(--background);
 }
 
+#drum-machine {
+  width: 600px;
+  height: 400px;
+
+  margin: 50px auto;
+
+  border-radius: 13px;
+  background-color: #615b52;
+}
