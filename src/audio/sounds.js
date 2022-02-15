@@ -28,6 +28,13 @@ const sounds = {
         'camera-perc',
         'hand-drum-perc'
     ],
+    snares: [
+        '80s-snare',
+        'reverb-snare',
+        'rim-snare',
+        'stick-snare',
+        'tight-snare'
+    ],
     toms: [
         'floor-tom',
         'rack-tom'

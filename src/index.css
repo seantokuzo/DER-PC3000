@@ -12,11 +12,41 @@ body {
 }
 
 #drum-machine {
-  width: 600px;
-  height: 400px;
+  width: 700px;
+  height: 500px;
 
   margin: 50px auto;
 
   border-radius: 13px;
   background-color: #615b52;
+}
+
+.drum-machine-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 20px;
+  color: white;
+}
+
+.drum-pads-div {
+  display: grid;
+  grid-template-columns: 128px 128px 128px;
+  grid-template-rows: 128px 128px 128px;
+  padding: 30px;
+}
+
+.pad {
+  width: 120px;
+  height: 120px;
+
+  border: 2px solid black;
+  border-radius: 13px;
+
+  text-align: center;
+}
+
+.pad-sample-name {
+
 }
