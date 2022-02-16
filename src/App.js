@@ -6,7 +6,7 @@ import crackerjap from "./images/thecrackerjaps-anim-nobck.png"
 
 function App() {
   const [currentPad, setCurrentPad] = useState({})
-  // console.log(currentPad)
+  console.log(currentPad)
 
   const [myPads, setmyPads] = useState([
     {
@@ -74,18 +74,46 @@ function App() {
     }
   ])
 
-  function geneHackman(obj) {
-    setCurrentPad(obj)
+  
+  function handleKeys(e) {
+    if (myPads.some(obj => obj.code === e.code)) {
+      setCurrentPad(myPads.filter(obj => obj.code === e.code)[0])
+      // console.log(currentPad)
+      const sample = document.getElementById(e.code)
+      sample.currentTime = 0
+      sample.play()
+        .then(() => console.log('x'))
+        .catch(() => console.log('y'))
+    } else return
+  }
+  useEffect(() => {
+
+    document.addEventListener('keydown', handleKeys)
+
+    return function () {
+      console.log("Clean up after YO SELF")
+      document.removeEventListener('keydown', handleKeys)
+    }
+  }, [currentPad])
+
+  function triggerSample(e) {
+    setCurrentPad(...myPads.filter(obj => obj.key === e.target.innerText.toUpperCase()))
+    console.log(currentPad)
+    const mySample = document.getElementById(e.target.innerText.toUpperCase())
+    mySample.currentTime = 0;
+    mySample.play()
+      .then(() => console.log('x'))
+      .catch(() => console.log("y"))
   }
 
   return (
     <main>
       <div id="drum-machine">
-        <div className="drum-machine-top" id="display">
+        <div className="drum-machine-top">
           <h2 id="dm-name">DER-PC3000</h2>
           <img id="crackerjap" src={crackerjap} />
         </div>
-        <DrumPads myPads={myPads} setCurrentPad={setCurrentPad} currentPad={currentPad} />
+        <DrumPads myPads={myPads} triggerSample={triggerSample} currentPad={currentPad} />
         <Controls currentPad={currentPad} myPads={myPads} />
       </div>
     </main>

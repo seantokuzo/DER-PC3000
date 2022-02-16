@@ -22,23 +22,26 @@
 }
 
 .controls-title {
+  color: var(--pad);
 }
 
 .backwards {
+  color: var(--pad);
   -webkit-transform:rotateY(180deg);
-    -moz-transform:rotateY(180deg);
-    -o-transform:rotateY(180deg);
-    -ms-transform:rotateY(180deg);
-    transform:rotateY(180deg);
+  -moz-transform:rotateY(180deg);
+  -o-transform:rotateY(180deg);
+  -ms-transform:rotateY(180deg);
+  transform:rotateY(180deg);
 }
 
 #current-pad-display {
-  width: 80%;
+  width: 90%;
   height: 60px;
-  /* margin: 30px auto 0; */
-  /* padding: 5px 5px; */
+  margin: auto;
 
   background-color: #000000;
+  border: 1px solid var(--controls-bcks);
+  border-radius: 5px;
   
   font-size: 15px;
   display: flex;
@@ -47,7 +50,8 @@
 }
 
 #display {
-  margin: 0;
+  margin: auto;
+  font-size: 25px;
   text-align: center;
   color: #972727;
   background-color: #000000;

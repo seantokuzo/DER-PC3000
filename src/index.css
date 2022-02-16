@@ -47,6 +47,7 @@ body {
   align-items: center;
   font-size: 20px;
   color: white;
+  background-color: #615b52;
 }
 
 #crackerjap {
@@ -79,7 +80,7 @@ body {
 
   background-color: var(--pad);
 
-  border: 2px solid black;
+  border: 2px solid var(--pad-dark);
   border-radius: 13px;
 
   text-align: center;
@@ -102,8 +103,58 @@ body {
 }
 
 .active {
-  background-color: #ce5b5b;
-  box-shadow: 0px 0px 20px -5px #ce5b5b;
+  -webkit-animation: padactive .2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: padactive .2s; /* Firefox < 16 */
+  -ms-animation: padactive .2s; /* Internet Explorer */
+  -o-animation: padactive .2s; /* Opera < 12.1 */
+  animation: padactive .2s;
+}
+
+@keyframes padactive {
+    from {
+      background-color: #ce5b5b;
+      box-shadow: 0px 0px 20px -5px #ce5b5b;
+    }
+    to {
+      background-color: var(--pad);
+      box-shadow: 2px 2px 0px 0px var(--pad-dark);
+    }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes padactive {
+    from {
+      background-color: #ce5b5b;
+      box-shadow: 0px 0px 20px -5px #ce5b5b;
+    }
+    to {
+      background-color: var(--pad);
+      box-shadow: 2px 2px 0px 0px var(--pad-dark);
+    }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes padactive {
+    from {
+      background-color: #ce5b5b;
+      box-shadow: 0px 0px 20px -5px #ce5b5b;
+    }
+    to {
+      background-color: var(--pad);
+      box-shadow: 2px 2px 0px 0px var(--pad-dark);
+    }
+}
+
+/* Internet Explorer */
+@-ms-keyframes padactive {
+    from {
+      background-color: #ce5b5b;
+      box-shadow: 0px 0px 20px -5px #ce5b5b;
+    }
+    to {
+      background-color: var(--pad);
+      box-shadow: 2px 2px 0px 0px var(--pad-dark);
+    }
 }
 
 .pad-letter {

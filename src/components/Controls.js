@@ -43,7 +43,7 @@ export default function Controls(props) {
             />
         </div>
     )
-    console.log(props.currentPad)
+    // console.log(props.currentPad)
     return (
         <div className="controls-div">
             <div className="controls-title-div">
