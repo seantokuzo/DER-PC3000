@@ -1,92 +1,94 @@
 import React, { useEffect, useState } from "react"
 import DrumPads from './components/DrumPads'
 import Controls from './components/Controls'
-import stupidBank from "./data/stupid-bank.js"
+import sounds from './data/sounds.js'
 import crackerjap from "./images/thecrackerjaps-anim-nobck.png"
+// import stupidBank from "./data/stupid-bank.js"
 
 function App() {
-  const [currentPad, setCurrentPad] = useState({})
-  console.log(currentPad)
 
-  const [myPads, setmyPads] = useState([
+  const [currentPad, setCurrentPad] = React.useState({})
+  // console.log(currentPad)
+
+  const [myPads, setmyPads] = React.useState([
     {
       key: 'Q',
       code: 'KeyQ',
-      type: stupidBank[0].type,
-      sample: stupidBank[0].samples[0].name,
-      src: stupidBank[0].samples[0].src
+      type: sounds[4].type,
+      sample: sounds[4].samples[0].name,
+      src: sounds[4].samples[0].src
     },
     {
       key: 'W',
       code: 'KeyW',
-      type: stupidBank[0].type,
-      sample: stupidBank[0].samples[1].name,
-      src: stupidBank[0].samples[1].src
+      type: sounds[4].type,
+      sample: sounds[4].samples[1].name,
+      src: sounds[4].samples[1].src
     },
     {
       key: 'E',
       code: 'KeyE',
-      type: stupidBank[0].type,
-      sample: stupidBank[0].samples[2].name,
-      src: stupidBank[0].samples[2].src
+      type: sounds[1].type,
+      sample: sounds[1].samples[1].name,
+      src: sounds[1].samples[1].src
     },
     {
       key: 'A',
       code: 'KeyA',
-      type: stupidBank[0].type,
-      sample: stupidBank[0].samples[3].name,
-      src: stupidBank[0].samples[3].src
+      type: sounds[0].type,
+      sample: sounds[0].samples[0].name,
+      src: sounds[0].samples[0].src
     },
     {
       key: 'S',
       code: 'KeyS',
-      type: stupidBank[0].type,
-      sample: stupidBank[0].samples[4].name,
-      src: stupidBank[0].samples[4].src
+      type: sounds[0].type,
+      sample: sounds[0].samples[2].name,
+      src: sounds[0].samples[2].src
     },
     {
       key: 'D',
       code: 'KeyD',
-      type: stupidBank[0].type,
-      sample: stupidBank[0].samples[5].name,
-      src: stupidBank[0].samples[5].src
+      type: sounds[2].type,
+      sample: sounds[2].samples[2].name,
+      src: sounds[2].samples[2].src
     },
     {
       key: 'Z',
       code: 'KeyZ',
-      type: stupidBank[0].type,
-      sample: stupidBank[0].samples[6].name,
-      src: stupidBank[0].samples[6].src
+      type: sounds[5].type,
+      sample: sounds[5].samples[4].name,
+      src: sounds[5].samples[4].src
     },
     {
       key: 'X',
       code: 'KeyX',
-      type: stupidBank[0].type,
-      sample: stupidBank[0].samples[7].name,
-      src: stupidBank[0].samples[7].src
+      type: sounds[7].type,
+      sample: sounds[7].samples[3].name,
+      src: sounds[7].samples[3].src
     },
     {
       key: 'C',
       code: 'KeyC',
-      type: stupidBank[0].type,
-      sample: stupidBank[0].samples[8].name,
-      src: stupidBank[0].samples[8].src
+      type: sounds[3].type,
+      sample: sounds[3].samples[1].name,
+      src: sounds[3].samples[1].src
     }
   ])
 
-  
-  function handleKeys(e) {
-    if (myPads.some(obj => obj.code === e.code)) {
-      setCurrentPad(myPads.filter(obj => obj.code === e.code)[0])
-      // console.log(currentPad)
-      const sample = document.getElementById(e.code)
-      sample.currentTime = 0
-      sample.play()
-        .then(() => console.log('x'))
-        .catch(() => console.log('y'))
-    } else return
-  }
-  useEffect(() => {
+
+  React.useEffect(() => {
+    function handleKeys(e) {
+      if (myPads.some(obj => obj.code === e.code)) {
+        setCurrentPad(myPads.filter(obj => obj.code === e.code)[0])
+        console.log(e.code)
+        const sample = document.getElementById(e.code.slice(3))
+        sample.currentTime = 0
+        sample.play()
+          .then(() => console.log('x'))
+          .catch(() => console.log('y'))
+      } else return
+    }
 
     document.addEventListener('keydown', handleKeys)
 
@@ -94,7 +96,7 @@ function App() {
       console.log("Clean up after YO SELF")
       document.removeEventListener('keydown', handleKeys)
     }
-  }, [currentPad])
+  }, [])
 
   function triggerSample(e) {
     setCurrentPad(...myPads.filter(obj => obj.key === e.target.innerText.toUpperCase()))
@@ -111,7 +113,7 @@ function App() {
       <div id="drum-machine">
         <div className="drum-machine-top">
           <h2 id="dm-name">DER-PC3000</h2>
-          <img id="crackerjap" src={crackerjap} />
+          <img id="crackerjap" src="https://docs.google.com/uc?export=download&id=1KvBVSFp49yPd3qJcWKLBFad3M0N2rs2h" />
         </div>
         <DrumPads myPads={myPads} triggerSample={triggerSample} currentPad={currentPad} />
         <Controls currentPad={currentPad} myPads={myPads} />

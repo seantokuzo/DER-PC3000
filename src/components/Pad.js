@@ -1,13 +1,11 @@
 import React from "react"
-let num = 0
-
 
 export default function Pad(props) {
 
     return (
         <div
             className={props.code === props.currentPad.code ? "drum-pad active" : "drum-pad"}
-            id={`${props.sampleName}`}
+            id={`${props.code}`}
             onClick={(event) => props.triggerSample(event)}
         >
             <h2 className="pad-letter">{props.letter}</h2>

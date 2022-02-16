@@ -40,7 +40,7 @@ const sounds = [
         type: 'percs',
         samples: [
             { name: 'camera perc', src: "https://docs.google.com/uc?export=download&id=11mJgXPzWoIeofgBYVD2LpTOod8fPjORU"},
-            { name: 'hand drum perc', src: "https://docs.google.com/uc?export=download&id=1aTZXxtLqS2cf69EH_EChbUYGaFDNHRqt"}
+            { name: 'hand drum', src: "https://docs.google.com/uc?export=download&id=1aTZXxtLqS2cf69EH_EChbUYGaFDNHRqt"}
         ]
     },
     {

@@ -6,7 +6,7 @@ export default function DrumPads(props) {
 
     const padsLayout = props.myPads.map((obj, ind) => (
         <Pad
-            key={nanoid()}
+            key={obj.code}
             code={obj.code}
             currentPad={props.currentPad}
             padNumber={ind + 1}
