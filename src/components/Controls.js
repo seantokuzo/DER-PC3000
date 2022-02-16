@@ -43,7 +43,7 @@ export default function Controls(props) {
             />
         </div>
     )
-    console.log(props.currentPad.sample)
+    console.log(props.currentPad)
     return (
         <div className="controls-div">
             <div className="controls-title-div">
@@ -58,7 +58,7 @@ export default function Controls(props) {
                 {lowPassSlider}
             </div>
             <div id="current-pad-display">
-                <input type="text" placeholder="----" id="current-pad" value={props.currentPad.sample} disabled />
+                <h6 id="current-pad">{props.currentPad.sample}</h6>
             </div>
         </div>
     )

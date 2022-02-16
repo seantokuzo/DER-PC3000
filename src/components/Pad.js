@@ -12,6 +12,7 @@ export default function Pad(props) {
                 className="sample"
                 id={`sample-${props.code}`}
                 src={props.source}
+                
             />
         </div>
     )

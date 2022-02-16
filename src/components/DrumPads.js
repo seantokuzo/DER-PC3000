@@ -5,16 +5,18 @@ import { nanoid } from 'nanoid'
 export default function DrumPads(props) {
 
     useEffect(() => {
+        console.log("useEffect")
         function handleKeys(e) {
             if (props.myPads.some(obj => obj.code === e.code)) {
+                props.setCurrentPad(
+                    ...props.myPads.filter(obj => obj.code === e.code)
+                )
+                console.log(props.currentPad)
                 const sample = document.getElementById(`sample-${e.code}`)
                 sample.currentTime = 0
                 sample.play()
-                    .then(props.setCurrentPad(prevPad => ({
-                        ...prevPad,
-                        ...props.myPads.filter(obj => obj.code === e.code)
-                    })))
-                    .catch(() => console.log('Oh No!'))
+                    .then(() => console.log('x'))
+                    .catch(() => console.log('y'))
             } else return
         }
 
@@ -28,14 +30,17 @@ export default function DrumPads(props) {
 
 
     function triggerSample(e) {
+        console.log(e.target.innerText.toUpperCase())
+        console.log(props.myPads.filter(obj => obj.key === e.target.innerText.toUpperCase()))
+        props.setCurrentPad(
+            ...props.myPads.filter(obj => obj.key === e.target.innerText.toUpperCase())
+        )
+        console.log(props.currentPad)
         const sample = document.getElementById(`sample-Key${e.target.innerText.toUpperCase()}`)
         sample.currentTime = 0
         sample.play()
-            .then(props.setCurrentPad(prevPad => ({
-                ...prevPad,
-                ...props.myPads.filter(obj => obj.code === e.target.innerText.toUpperCase())
-            })))
-            .catch(() => console.log("Ooooops!"))
+            .then(() => console.log('x'))
+            .catch(() => console.log("y"))
     }
 
     const padsLayout = props.myPads.map((obj, ind) => (
