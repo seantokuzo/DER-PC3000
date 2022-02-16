@@ -1,5 +1,6 @@
 :root {
   --background: #f7f1e9;
+  --pad: #ad9673;
 }
 
 * {
@@ -9,44 +10,83 @@
 body {
   margin: 0;
   background: var(--background);
+  font-family: 'Orbitron', sans-serif;
 }
 
 #drum-machine {
   width: 700px;
   height: 500px;
 
-  margin: 50px auto;
+  margin: 5% auto;
 
   border-radius: 13px;
   background-color: #615b52;
+
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  grid-gap: 10px;
 }
 
 .drum-machine-top {
+  grid-column: 2 / span 18;
+  grid-row: 2 / 3;
+  border: 1px solid red;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  padding: 0 20px;
+  padding: 0 00px;
   color: white;
 }
 
 .drum-pads-div {
+  border: 1px solid black;
+  grid-row: 4 / span 16;
+  grid-column: 2 / span 11;
+  gap: 5px;
   display: grid;
-  grid-template-columns: 128px 128px 128px;
-  grid-template-rows: 128px 128px 128px;
-  padding: 30px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
 }
 
 .pad {
-  width: 120px;
-  height: 120px;
+  grid-column: span 1;
+  grid-row: span 1;
+
+  background-color: var(--pad);
 
   border: 2px solid black;
   border-radius: 13px;
 
   text-align: center;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: .1fr, 1fr, 1fr, .1fr;
+}
+
+.pad-letter {
+  grid-row: 2 / 3;
+
+  margin: 0;
 }
 
 .pad-sample-name {
+  grid-row: 3 / 4;
 
+  margin: 0;
+
+  font-size: .8em;
+}
+
+.controls-div {
+  grid-column: 13 / span 7;
+  grid-row: 4 / span 16;
+
+  border: 1px solid black;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

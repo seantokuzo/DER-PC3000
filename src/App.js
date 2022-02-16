@@ -60,7 +60,7 @@ function App() {
   return (
     <div id="drum-machine">
       <div className="drum-machine-top">
-        <h2>LamePC3000</h2>
+        <h2>DER-PC3000</h2>
         <i className="fa-brands fa-free-code-camp"></i>
       </div>
       <DrumPads currentBank={currentBank} />

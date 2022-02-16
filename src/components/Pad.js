@@ -5,7 +5,7 @@ export default function Pad(props) {
 
     return (
         <div className="pad" id={`pad-${props.padNumber}`}>
-            <h2>{props.letter}</h2>
+            <h2 className="pad-letter">{props.letter}</h2>
             <p className="pad-sample-name">{props.sampleName}</p>
         </div>
     )
