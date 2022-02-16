@@ -74,6 +74,10 @@ function App() {
     }
   ])
 
+  function geneHackman(obj) {
+    setCurrentPad(obj)
+  }
+
   return (
     <main>
       <div id="drum-machine">

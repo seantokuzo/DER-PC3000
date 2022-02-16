@@ -46,7 +46,7 @@
   align-items: center;
 }
 
-#current-pad {
+#display {
   margin: 0;
   text-align: center;
   color: #972727;
@@ -65,7 +65,7 @@
 }
 
 #sliders-div input {
-
+  box-shadow: 1.5px -1.5px 0px 0px var(--pad-dark);
 }
 
 input[type=range] {
@@ -108,6 +108,7 @@ input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
   margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+  box-shadow: 1.5px -1.5px 0px 0px var(--pad-dark);
 }
 
 /* All the same stuff for Firefox */
@@ -119,6 +120,7 @@ input[type=range]::-moz-range-thumb {
   border-radius: 3px;
   background: var(--pad);
   cursor: pointer;
+  box-shadow: 1.5px -1.5px 0px 0px var(--pad-dark);
 }
 
 /* All the same stuff for IE */
@@ -130,6 +132,7 @@ input[type=range]::-ms-thumb {
   border-radius: 3px;
   background: var(--pad);
   cursor: pointer;
+  box-shadow: 1.5px -1.5px 0px 0px var(--pad-dark);
 }
 
 input[type=range]::-webkit-slider-runnable-track {

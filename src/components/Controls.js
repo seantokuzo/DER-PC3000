@@ -58,7 +58,7 @@ export default function Controls(props) {
                 {lowPassSlider}
             </div>
             <div id="current-pad-display">
-                <h6 id="current-pad">{props.currentPad.sample}</h6>
+                <h6 id="display">{props.currentPad.sample}</h6>
             </div>
         </div>
     )

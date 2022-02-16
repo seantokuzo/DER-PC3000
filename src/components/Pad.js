@@ -9,8 +9,8 @@ export default function Pad(props) {
             <h2 className="pad-letter">{props.letter}</h2>
             <p className="pad-sample-name">{props.sampleName}</p>
             <audio
-                className="sample"
-                id={`sample-${props.code}`}
+                className="clip"
+                id={`${props.letter}`}
                 src={props.source}
                 
             />
