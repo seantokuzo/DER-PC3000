@@ -7,13 +7,14 @@ export default function DrumPads(props) {
     useEffect(() => {
         function handleKeys(e) {
             if (props.myPads.some(obj => obj.code === e.code)) {
-                props.setCurrentPad(prevPad => ({
-                    ...prevPad,
-                    ...props.myPads.filter(obj => obj.code === e.code)
-                }))
                 const sample = document.getElementById(`sample-${e.code}`)
                 sample.currentTime = 0
                 sample.play()
+                    .then(props.setCurrentPad(prevPad => ({
+                        ...prevPad,
+                        ...props.myPads.filter(obj => obj.code === e.code)
+                    })))
+                    .catch(() => console.log('Oh No!'))
             } else return
         }
 
@@ -27,13 +28,14 @@ export default function DrumPads(props) {
 
 
     function triggerSample(e) {
-        props.setCurrentPad(prevPad => ({
-            ...prevPad,
-            ...props.myPads.filter(obj => obj.code === e.target.innerText.toUpperCase())
-        }))
         const sample = document.getElementById(`sample-Key${e.target.innerText.toUpperCase()}`)
         sample.currentTime = 0
         sample.play()
+            .then(props.setCurrentPad(prevPad => ({
+                ...prevPad,
+                ...props.myPads.filter(obj => obj.code === e.target.innerText.toUpperCase())
+            })))
+            .catch(() => console.log("Ooooops!"))
     }
 
     const padsLayout = props.myPads.map((obj, ind) => (
