@@ -1,71 +1,90 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import DrumPads from './components/DrumPads'
 import Controls from './components/Controls'
 import sounds from "./audio/sounds.js"
 
 function App() {
-  const soundTypes = Object.keys(sounds)
+  const soundTypes = sounds.map(obj => obj.type)
   console.log(soundTypes)
   console.log(soundTypes.length)
 
-  const [currentBank, setCurrentBank] = useState([
+  const [myPads, setmyPads] = useState([
     {
-      key: 'w',
-      sample: `${sounds.percs[0]}`,
-      src: `./audio/percs/${sounds.percs[0]}.wav`
+      key: 'Q',
+      code: 'KeyQ',
+      type: sounds[4].type,
+      sample: sounds[4].samples[0].name,
+      src: sounds[4].samples[0].src
     },
     {
-      key: 'e',
-      sample: `${sounds.vfx[0]}`,
-      src: `./audio/vfx/${sounds.vfx[0]}.wav`
+      key: 'W',
+      code: 'KeyW',
+      type: sounds[8].type,
+      sample: sounds[8].samples[0].name,
+      src: sounds[8].samples[0].src
     },
     {
-      key: 'r',
-      sample: `${sounds.fun[0]}`,
-      src: `./audio/fun/${sounds.fun[0]}.wav`
+      key: 'E',
+      code: 'KeyE',
+      type: sounds[1].type,
+      sample: sounds[1].samples[0].name,
+      src: sounds[1].samples[0].src
     },
     {
-      key: 's',
-      sample: `${sounds.claps[0]}`,
-      src: `./audio/claps/${sounds.claps[0]}.wav`
+      key: 'A',
+      code: 'KeyA',
+      type: sounds[0].type,
+      sample: sounds[0].samples[0].name,
+      src: sounds[0].samples[0].src
     },
     {
-      key: 'd',
-      sample: `${sounds.hats[0]}`,
-      src: `./audio/hats/${sounds.hats[0]}.wav`
+      key: 'S',
+      code: 'KeyS',
+      type: sounds[2].type,
+      sample: sounds[2].samples[0].name,
+      src: sounds[2].samples[0].src
     },
     {
-      key: 'f',
-      sample: `${sounds.hats[1]}`,
-      src: `./audio/hats/${sounds.hats[1]}.wav`
+      key: 'D',
+      code: 'KeyD',
+      type: sounds[2].type,
+      sample: sounds[2].samples[1].name,
+      src: sounds[2].samples[1].src
     },
     {
-      key: 'x',
-      sample: `${sounds.snares[0]}`,
-      src: `./audio/snares/${sounds.snares[0]}.wav`
+      key: 'Z',
+      code: 'KeyZ',
+      type: sounds[5].type,
+      sample: sounds[5].samples[3].name,
+      src: sounds[5].samples[3].src
     },
     {
-      key: 'c',
-      sample: `${sounds.snares[1]}`,
-      src: `./audio/snares/${sounds.snares[1]}.wav`
+      key: 'X',
+      code: 'KeyX',
+      type: sounds[5].type,
+      sample: sounds[5].samples[0].name,
+      src: sounds[5].samples[0].src
     },
     {
-      key: 'v',
-      sample: `${sounds.kicks[0]}`,
-      src: `./audio/kicks/${sounds.kicks[0]}.wav`
+      key: 'C',
+      code: 'KeyC',
+      type: sounds[3].type,
+      sample: sounds[3].samples[1].name,
+      src: sounds[3].samples[1].src
     }
   ])
 
-
   return (
-    <div id="drum-machine">
-      <div className="drum-machine-top">
-        <h2>DER-PC3000</h2>
-        <i className="fa-brands fa-free-code-camp"></i>
+    <main>
+      <div id="drum-machine">
+        <div className="drum-machine-top" id="display">
+          <h2 id="dm-name">DER-PC3000</h2>
+          <i className="fa-brands fa-free-code-camp"></i>
+        </div>
+        <DrumPads myPads={myPads} />
+        <Controls />
       </div>
-      <DrumPads currentBank={currentBank} />
-      <Controls />
-    </div>
+    </main>
   )
 }
 
