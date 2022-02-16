@@ -1,21 +1,64 @@
 import React from "react"
 
-export default function Controls() {
-
+export default function Controls(props) {
+    const volumeSlider = (
+        <div className='volume-slider'>
+            <input
+                max='1'
+                min='0'
+                // onChange={this.adjustVolume}
+                step='0.01'
+                type='range'
+                placeholder="25%"
+                // value='50%'
+                id="volume"
+            />
+        </div>
+    )
+    const hiPassSlider = (
+        <div className='volume-slider'>
+            <input
+                max='1'
+                min='0'
+                // onChange={this.adjustVolume}
+                step='0.01'
+                type='range'
+                placeholder="25%"
+                // value='50%'
+                id="volume"
+            />
+        </div>
+    )
+    const lowPassSlider = (
+        <div className='volume-slider'>
+            <input
+                max='1'
+                min='0'
+                // onChange={this.adjustVolume}
+                step='0.01'
+                type='range'
+                placeholder="25%"
+                // value='50%'
+                id="volume"
+            />
+        </div>
+    )
+    console.log(props.currentPad.sample)
     return (
         <div className="controls-div">
-            <h2>Gimme Space</h2>
-            <div className='volume-slider'>
-                <input
-                    max='1'
-                    min='0'
-                    // onChange={this.adjustVolume}
-                    step='0.01'
-                    type='range'
-                    placeholder="25%"
-                    // value='50%'
-                    id="volume"
-                />
+            <div className="controls-title-div">
+                <h2 className="controls-title">TW</h2>
+                <h2 className="backwards">KA3</h2>
+                <h2 className="controls-title">3</h2>
+                <h2 className="backwards">R</h2>
+            </div>
+            <div id='sliders-div'>
+                {volumeSlider}
+                {hiPassSlider}
+                {lowPassSlider}
+            </div>
+            <div id="current-pad-display">
+                <input type="text" placeholder="----" id="current-pad" value={props.currentPad.sample} disabled />
             </div>
         </div>
     )

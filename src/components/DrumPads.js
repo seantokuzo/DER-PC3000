@@ -5,26 +5,32 @@ import { nanoid } from 'nanoid'
 export default function DrumPads(props) {
 
     useEffect(() => {
+        function handleKeys(e) {
+            if (props.myPads.some(obj => obj.code === e.code)) {
+                props.setCurrentPad(prevPad => ({
+                    ...prevPad,
+                    ...props.myPads.filter(obj => obj.code === e.code)
+                }))
+                const sample = document.getElementById(`sample-${e.code}`)
+                sample.currentTime = 0
+                sample.play()
+            } else return
+        }
+
         document.addEventListener('keydown', handleKeys)
+
+        return function () {
+            console.log("Clean up after YO SELF")
+            document.removeEventListener('keydown', handleKeys)
+        }
     }, [])
 
-    function handleKeys(e) {
-        console.log(e)
-        const triggerPad = (code) => {
-            const pad = document.getElementById(`sample-${code}`)
-            console.log("flash")
-        }
-        if (props.myPads.some(obj => obj.code === e.code)) {
-            const sample = document.getElementById(`sample-${e.code}`)
-            sample.currentTime = 0
-            sample.play()
-            triggerPad(e.code)
-        }
-    }
 
     function triggerSample(e) {
-        console.log("hear me?")
-        console.log(`sample-${e.target.innerText}`)
+        props.setCurrentPad(prevPad => ({
+            ...prevPad,
+            ...props.myPads.filter(obj => obj.code === e.target.innerText.toUpperCase())
+        }))
         const sample = document.getElementById(`sample-Key${e.target.innerText.toUpperCase()}`)
         sample.currentTime = 0
         sample.play()

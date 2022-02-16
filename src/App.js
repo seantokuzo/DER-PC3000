@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
 import DrumPads from './components/DrumPads'
 import Controls from './components/Controls'
-import sounds from "./audio/sounds.js"
+import sounds from "./data/sounds.js"
+import crackerjap from "./images/thecrackerjaps-anim-nobck.png"
 
 function App() {
-  const soundTypes = sounds.map(obj => obj.type)
-  console.log(soundTypes)
-  console.log(soundTypes.length)
+  const [currentPad, setCurrentPad] = useState({})
+  // console.log(currentPad)
 
   const [myPads, setmyPads] = useState([
     {
@@ -79,10 +79,10 @@ function App() {
       <div id="drum-machine">
         <div className="drum-machine-top" id="display">
           <h2 id="dm-name">DER-PC3000</h2>
-          <i className="fa-brands fa-free-code-camp"></i>
+          <img id="crackerjap" src={crackerjap} />
         </div>
-        <DrumPads myPads={myPads} />
-        <Controls />
+        <DrumPads myPads={myPads} setCurrentPad={setCurrentPad} />
+        <Controls currentPad={currentPad} myPads={myPads} />
       </div>
     </main>
   )

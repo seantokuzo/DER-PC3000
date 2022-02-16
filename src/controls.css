@@ -2,13 +2,77 @@
   grid-row: 2 / 3;
   grid-column: 4 / 6;
 
-  border: 1px solid black;
+  min-width: 200px;
 
+  border: 5px solid black;
+  border-radius: 10px;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--controls-bck);
+}
+
+.controls-title-div {
+  display: flex;
+  
+  color: var(--pad);
+}
+
+.controls-title {
+}
+
+.backwards {
+  -webkit-transform:rotateY(180deg);
+    -moz-transform:rotateY(180deg);
+    -o-transform:rotateY(180deg);
+    -ms-transform:rotateY(180deg);
+    transform:rotateY(180deg);
+}
+
+#current-pad-display {
+  width: 80%;
+  height: 60px;
+  /* margin: 30px auto 0; */
+  /* padding: 5px 5px; */
+
+  background-color: #000000;
+  
+  font-size: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+#current-pad {
+  margin: 0;
+  text-align: center;
+  color: #972727;
+  background-color: #000000;
+  border: none;
+}
+
+#sliders-div {
+  width: 100%;
+  height: 45%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid black;
+}
+
+#sliders-div input {
+
+}
+
+input[type=range] {
+  transform: rotate(90deg);
+}
+
+/*SLIDER SLIDER SLIDER SLIDER SLIDER SLIDER */
 input[type=range] {
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
   width: 100%; /* Specific width is required for Firefox. */
@@ -38,7 +102,7 @@ input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: 1px solid #000000;
   height: 36px;
-  width: 16px;
+  width: 12px;
   border-radius: 3px;
   background: var(--pad);
   cursor: pointer;
@@ -51,7 +115,7 @@ input[type=range]::-moz-range-thumb {
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   border: 1px solid #000000;
   height: 36px;
-  width: 16px;
+  width: 12px;
   border-radius: 3px;
   background: var(--pad);
   cursor: pointer;
@@ -62,7 +126,7 @@ input[type=range]::-ms-thumb {
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   border: 1px solid #000000;
   height: 36px;
-  width: 16px;
+  width: 12px;
   border-radius: 3px;
   background: var(--pad);
   cursor: pointer;
@@ -70,7 +134,7 @@ input[type=range]::-ms-thumb {
 
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
-  height: 8.4px;
+  height: 7px;
   cursor: pointer;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   background: var(--slider-bck);
@@ -84,7 +148,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 input[type=range]::-moz-range-track {
   width: 100%;
-  height: 8.4px;
+  height: 7px;
   cursor: pointer;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   background: var(--slider-bck);
@@ -94,7 +158,7 @@ input[type=range]::-moz-range-track {
 
 input[type=range]::-ms-track {
   width: 100%;
-  height: 8.4px;
+  height: 7px;
   cursor: pointer;
   background: transparent;
   border-color: transparent;
@@ -119,3 +183,4 @@ input[type=range]::-ms-fill-upper {
 input[type=range]:focus::-ms-fill-upper {
   background: var(--slider-bck);
 }
+/*END SLIDER END SLIDER END SLIDER END SLIDER END SLIDER END SLIDER */
