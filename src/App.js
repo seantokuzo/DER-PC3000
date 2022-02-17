@@ -7,8 +7,7 @@ import crackerjap from "./images/thecrackerjaps-anim-nobck.png"
 // import stupidBank from "./data/stupid-bank.js"
 
 function App() {
-  const [soundsMenu, setSoundsMenu] = useState(true)
-  console.log(showSoundsMenu)
+  const [soundsMenu, setSoundsMenu] = useState(false)
   const [currentPad, setCurrentPad] = useState({})
   const [myPads, setmyPads] = useState([
     {
@@ -75,7 +74,18 @@ function App() {
       src: sounds[3].samples[2].src
     }
   ])
-
+  const [showSubMenu, setShowSubMenu] = useState(false)
+  const [subMenu, setSubMenu] = useState([
+    { type: 'claps', on: false },
+    { type: 'fun', on: false },
+    { type: 'hats', on: false },
+    { type: 'kicks', on: false },
+    { type: 'percs', on: false },
+    { type: 'snares', on: false },
+    { type: 'toms', on: false },
+    { type: 'tracks', on: false },
+    { type: 'vfx', on: false }
+  ])
 
   React.useEffect(() => {
     function handleKeys(e) {
@@ -118,13 +128,37 @@ function App() {
 
   function showSoundsMenu() {
     if (currentPad.key) {
-      setSoundsMenu(true)
+      setSoundsMenu(prevMenu => true)
     } else return
   }
 
+  function handleTypeClick(e) {
+    setSubMenu(prevSub => [...prevSub.slice(0, onIndex), replacement, ...prevSub.slice(onIndex + 1)])
+    setSoundsMenu(false)
+    setShowSubMenu(true)
+    const onIndex = subMenu.map((obj, ind) => {
+      if (obj.type === e.target.innerText) {
+        return ind
+      } else return false
+    }).filter(item => item !== false)[0]
+    const replacement = { type: subMenu[onIndex].type, on: true }
+  }
+  // console.log(subMenu)
+    // console.log(props.soundsMenu)
+
   return (
     <main>
-      {soundsMenu && <SoundsMenu sounds={sounds} updatePadSample={updatePadSample} exitSoundsMenu={exitSoundsMenu} />}
+      {
+        soundsMenu && <SoundsMenu
+          sounds={sounds}
+          updatePadSample={updatePadSample}
+          exitSoundsMenu={exitSoundsMenu}
+          soundsMenu={soundsMenu}
+          subMenu={subMenu}
+          handleTypeClick={handleTypeClick}
+          showSubMenu={showSubMenu}
+        />
+      }
       <div id="drum-machine">
         <div className="drum-machine-top">
           <h2 id="dm-name">DER-PC3000</h2>

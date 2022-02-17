@@ -51,3 +51,16 @@
     cursor: pointer;
     color: var(--menu-red);
 }
+
+.sample-sub-div {
+
+}
+
+.sample-sub-div:hover {
+    cursor: pointer;
+    color: var(--menu-red);
+}
+
+.sample-sub {
+
+}
