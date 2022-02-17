@@ -7,7 +7,7 @@ import crackerjap from "./images/thecrackerjaps-anim-nobck.png"
 // import stupidBank from "./data/stupid-bank.js"
 
 function App() {
-  const [soundsMenu, setSoundsMenu] = useState(false)
+  const [soundsMenu, setSoundsMenu] = useState(true)
   console.log(showSoundsMenu)
   const [currentPad, setCurrentPad] = useState({})
   const [myPads, setmyPads] = useState([

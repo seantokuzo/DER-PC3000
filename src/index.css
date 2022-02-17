@@ -4,6 +4,8 @@
   --pad-dark: #745f41;
   --slider-bck: #000000;
   --controls-bck: #252421;
+  --menu-green: #177026;
+  --menu-red: #ce5b5b;
 }
 
 * {
@@ -98,8 +100,8 @@ body {
 }
 
 .drum-pad:active {
-  background-color: #ce5b5b;
-  box-shadow: 0px 0px 20px -5px #ce5b5b;
+  background-color: var(--menu-red);
+  box-shadow: 0px 0px 20px -5px var(--menu-red);
   /* box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7); */
 }
 
@@ -113,8 +115,8 @@ body {
 
 @keyframes padactive {
     from {
-      background-color: #ce5b5b;
-      box-shadow: 0px 0px 20px -5px #ce5b5b;
+      background-color: var(--menu-red);
+      box-shadow: 0px 0px 20px -5px var(--menu-red);
     }
     to {
       background-color: var(--pad);
@@ -125,8 +127,8 @@ body {
 /* Firefox < 16 */
 @-moz-keyframes padactive {
     from {
-      background-color: #ce5b5b;
-      box-shadow: 0px 0px 20px -5px #ce5b5b;
+      background-color: var(--menu-red);
+      box-shadow: 0px 0px 20px -5px var(--menu-red);
     }
     to {
       background-color: var(--pad);
@@ -137,8 +139,8 @@ body {
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes padactive {
     from {
-      background-color: #ce5b5b;
-      box-shadow: 0px 0px 20px -5px #ce5b5b;
+      background-color: var(--menu-red);
+      box-shadow: 0px 0px 20px -5px var(--menu-red);
     }
     to {
       background-color: var(--pad);
@@ -149,8 +151,8 @@ body {
 /* Internet Explorer */
 @-ms-keyframes padactive {
     from {
-      background-color: #ce5b5b;
-      box-shadow: 0px 0px 20px -5px #ce5b5b;
+      background-color: var(--menu-red);
+      box-shadow: 0px 0px 20px -5px var(--menu-red);
     }
     to {
       background-color: var(--pad);

@@ -28,7 +28,7 @@
 
 .sounds-menu-type:hover {
     cursor: pointer;
-    color: #55e76d;
+    color: var(--menu-red);
 }
 
 #exit-sounds-menu {
@@ -49,5 +49,5 @@
 
 #exit-sounds-menu:hover {
     cursor: pointer;
-    color: #55e76d;
+    color: var(--menu-red);
 }
