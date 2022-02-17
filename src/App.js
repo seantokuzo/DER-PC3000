@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from "react"
 import DrumPads from './components/DrumPads'
 import Controls from './components/Controls'
-import SoundsMenu from './components/SoundsMenu'
+import MainMenu from './components/MainMenu'
+import ClapsMenu from "./components/submenu-components/ClapsMenu"
 import sounds from './data/sounds.js'
 import crackerjap from "./images/thecrackerjaps-anim-nobck.png"
 // import stupidBank from "./data/stupid-bank.js"
 
 function App() {
-  const [soundsMenu, setSoundsMenu] = useState(false)
+  const [mainMenu, setMainMenu] = useState(false)
+  const [clapsMenu, setClapsMenu] = useState(true)
+  const [funMenu, setFunMenu] = useState(false)
+  const [hatsMenu, setHatsMenu] = useState(false)
+  const [kicksMenu, setKicksMenu] = useState(false)
+  const [percsMenu, setPercsMenu] = useState(false)
+  const [snaresMenu, setSnaresMenu] = useState(false)
+  const [tomsMenu, setTomsMenu] = useState(false)
+  const [tracksMenu, setTracksMenu] = useState(false)
+  const [vfxMenu, setVfxMenu] = useState(false)
   const [currentPad, setCurrentPad] = useState({})
   const [myPads, setmyPads] = useState([
     {
@@ -74,20 +84,9 @@ function App() {
       src: sounds[3].samples[2].src
     }
   ])
-  const [showSubMenu, setShowSubMenu] = useState(false)
-  const [subMenu, setSubMenu] = useState([
-    { type: 'claps', on: false },
-    { type: 'fun', on: false },
-    { type: 'hats', on: false },
-    { type: 'kicks', on: false },
-    { type: 'percs', on: false },
-    { type: 'snares', on: false },
-    { type: 'toms', on: false },
-    { type: 'tracks', on: false },
-    { type: 'vfx', on: false }
-  ])
 
-  React.useEffect(() => {
+  //HANDLE KEYBOARD TRIGGER
+  useEffect(() => {
     function handleKeys(e) {
       if (myPads.some(obj => obj.code === e.code)) {
         setCurrentPad(myPads.filter(obj => obj.code === e.code)[0])
@@ -108,6 +107,7 @@ function App() {
     }
   }, [])
 
+  //HANDLE MOUSE CLICK TRIGGER
   function triggerSample(e) {
     setCurrentPad(...myPads.filter(obj => obj.key === e.target.innerText.toUpperCase()))
     console.log(currentPad)
@@ -118,46 +118,61 @@ function App() {
       .catch(() => console.log("y"))
   }
 
-  function updatePadSample() {
-    console.log('please update')
+  function exitMainMenu() {
+    setMainMenu(false)
   }
 
-  function exitSoundsMenu() {
-    setSoundsMenu(false)
-  }
-
-  function showSoundsMenu() {
+  function showMainMenu() {
     if (currentPad.key) {
-      setSoundsMenu(prevMenu => true)
+      setMainMenu(true)
     } else return
   }
 
   function handleTypeClick(e) {
-    setSubMenu(prevSub => [...prevSub.slice(0, onIndex), replacement, ...prevSub.slice(onIndex + 1)])
-    setSoundsMenu(false)
-    setShowSubMenu(true)
-    const onIndex = subMenu.map((obj, ind) => {
-      if (obj.type === e.target.innerText) {
-        return ind
-      } else return false
-    }).filter(item => item !== false)[0]
-    const replacement = { type: subMenu[onIndex].type, on: true }
+    console.log("Show that submenu")
+    setMainMenu(false)
+    if (e.target.innerText === 'claps') {
+      setClapsMenu(true)
+    } else if (e.target.innerText === 'fun') {
+      setFunMenu(true)
+    } else if (e.target.innerText === 'hats') {
+      setHatsMenu(true)
+    } else if (e.target.innerText === 'kicks') {
+      setKicksMenu(true)
+    } else if (e.target.innerText === 'percs') {
+      setPercsMenu(true)
+    } else if (e.target.innerText === 'snares') {
+      setKicksMenu(true)
+    } else if (e.target.innerText === 'toms') {
+      setTomsMenu(true)
+    } else if (e.target.innerText === 'tracks') {
+      setTracksMenu(true)
+    } else if (e.target.innerText === 'vfx') {
+      setVfxMenu(true)
+    } else return
   }
-  // console.log(subMenu)
-    // console.log(props.soundsMenu)
+
+  console.log(`claps: ${clapsMenu}`)
+  console.log(`fun: ${funMenu}`)
+  console.log(`hats: ${hatsMenu}`)
+  console.log(`kicks: ${kicksMenu}`)
+  console.log(`percs: ${percsMenu}`)
+  console.log(`snares: ${snaresMenu}`)
+  console.log(`toms: ${tomsMenu}`)
+  console.log(`tracks: ${tracksMenu}`)
+  console.log(`vfx: ${vfxMenu}`)
 
   return (
     <main>
-      {
-        soundsMenu && <SoundsMenu
+      {mainMenu && <MainMenu
           sounds={sounds}
-          updatePadSample={updatePadSample}
-          exitSoundsMenu={exitSoundsMenu}
-          soundsMenu={soundsMenu}
-          subMenu={subMenu}
+          exitMainMenu={exitMainMenu}
           handleTypeClick={handleTypeClick}
-          showSubMenu={showSubMenu}
         />
+      }
+      {clapsMenu && <ClapsMenu
+        sounds={sounds}
+      />
       }
       <div id="drum-machine">
         <div className="drum-machine-top">
@@ -172,7 +187,7 @@ function App() {
         <Controls
           currentPad={currentPad}
           myPads={myPads}
-          showSoundsMenu={showSoundsMenu}
+          showMainMenu={showMainMenu}
         />
       </div>
     </main>

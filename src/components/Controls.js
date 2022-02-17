@@ -59,7 +59,7 @@ export default function Controls(props) {
             </div>
             <div
                 id="current-pad-display"
-                onClick={props.showSoundsMenu}
+                onClick={props.showMainMenu}
             >
                 <h6 id="display">{props.currentPad.sample}</h6>
             </div>

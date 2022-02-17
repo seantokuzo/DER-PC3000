@@ -1,0 +1,42 @@
+.samples-menu-page {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+
+    border: 5px solid var(--pad-dark);
+    border-radius: 10px;
+    background-color: black;
+    box-shadow: 0px 0px 20px 5px rgb(0, 0, 0);
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+}
+
+.sample-selector-div {
+    min-width: 300px;
+    text-align: center;
+    
+    
+    font-size: 18px;
+    color: white;
+    
+    padding: 10px;
+}
+
+.sample-selector-div:hover {
+    cursor: pointer;
+    color: var(--menu-red);
+}
+
+.sample-selector-div:active .sample-selector {
+    font-style: italic;
+    color: var(--menu-green);
+}
+
+.sample-selector {
+    
+}
