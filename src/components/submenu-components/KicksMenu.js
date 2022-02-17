@@ -1,13 +1,13 @@
 import React from "react"
 import { nanoid } from 'nanoid'
 
-export default function FunMenu(props) {
+export default function KicksMenu(props) {
 
-    const funSamples = props.sounds[1].samples.map(obj => (
+    const kicksSamples = props.sounds[3].samples.map(obj => (
         <div
             key={nanoid()}
             className="sample-selector-div"
-            onClick={(event) => props.handleSampleSelection(event, 'fun')}
+            onClick={(event) => props.handleSampleSelection(event, 'kicks')}
         >
             <h3 className="sample-selector">{obj.name}</h3>
         </div>
@@ -15,7 +15,7 @@ export default function FunMenu(props) {
 
     return (
         <div className="samples-menu-page">
-            {funSamples}
+            {kicksSamples}
         </div>
     )
 }

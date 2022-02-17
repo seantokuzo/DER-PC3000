@@ -4,6 +4,13 @@ import Controls from './components/Controls'
 import MainMenu from './components/MainMenu'
 import ClapsMenu from "./components/submenu-components/ClapsMenu"
 import FunMenu from './components/submenu-components/FunMenu'
+import HatsMenu from "./components/submenu-components/HatsMenu"
+import KicksMenu from "./components/submenu-components/KicksMenu"
+import PercsMenu from "./components/submenu-components/PercsMenu"
+import SnaresMenu from "./components/submenu-components/SnaresMenu"
+import TomsMenu from "./components/submenu-components/TomsMenu"
+import TracksMenu from "./components/submenu-components/TracksMenu"
+import VfxMenu from "./components/submenu-components/VfxMenu"
 import sounds from './data/sounds.js'
 import crackerjap from "./images/thecrackerjaps-anim-nobck.png"
 // import stupidBank from "./data/stupid-bank.js"
@@ -128,7 +135,7 @@ function App() {
   }
   
   function handleTypeClick(e) {
-    console.log("Show that submenu")
+    console.log(e.target.innerText === 'kicks')
     setMainMenu(false)
     if (e.target.innerText === 'claps') {
       setClapsMenu(true)
@@ -141,7 +148,7 @@ function App() {
     } else if (e.target.innerText === 'percs') {
       setPercsMenu(true)
     } else if (e.target.innerText === 'snares') {
-      setKicksMenu(true)
+      setSnaresMenu(true)
     } else if (e.target.innerText === 'toms') {
       setTomsMenu(true)
     } else if (e.target.innerText === 'tracks') {
@@ -158,7 +165,7 @@ function App() {
     setHatsMenu(false)
     setKicksMenu(false)
     setPercsMenu(false)
-    setKicksMenu(false)
+    setSnaresMenu(false)
     setTomsMenu(false)
     setTracksMenu(false)
     setVfxMenu(false)
@@ -194,9 +201,9 @@ function App() {
   // console.log(`claps: ${clapsMenu}`)
   // console.log(`fun: ${funMenu}`)
   // console.log(`hats: ${hatsMenu}`)
-  // console.log(`kicks: ${kicksMenu}`)
+  console.log(`kicks: ${kicksMenu}`)
   // console.log(`percs: ${percsMenu}`)
-  // console.log(`snares: ${snaresMenu}`)
+  console.log(`snares: ${snaresMenu}`)
   // console.log(`toms: ${tomsMenu}`)
   // console.log(`tracks: ${tracksMenu}`)
   // console.log(`vfx: ${vfxMenu}`)
@@ -216,6 +223,32 @@ function App() {
       />
       }
       {funMenu && <FunMenu
+        sounds={sounds}
+        handleSampleSelection={handleSampleSelection}
+      />
+      }
+      {hatsMenu && <HatsMenu
+        sounds={sounds}
+        handleSampleSelection={handleSampleSelection}
+      />
+      }
+      {kicksMenu && <KicksMenu
+        sounds={sounds}
+        handleSampleSelection={handleSampleSelection}
+      />
+      }
+      {percsMenu && <PercsMenu
+        sounds={sounds}
+        handleSampleSelection={handleSampleSelection}
+      />
+      }
+      {snaresMenu && <SnaresMenu
+        sounds={sounds}
+        handleSampleSelection={handleSampleSelection}
+      />
+      }
+
+      {tomsMenu && <TomsMenu
         sounds={sounds}
         handleSampleSelection={handleSampleSelection}
       />

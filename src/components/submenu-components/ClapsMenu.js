@@ -7,7 +7,7 @@ export default function ClapsMenu(props) {
         <div
             key={nanoid()}
             className="sample-selector-div"
-            onClick={(event, str) => props.handleSampleSelection(event, 'claps')}
+            onClick={(event) => props.handleSampleSelection(event, 'claps')}
         >
             <h3 className="sample-selector">{obj.name}</h3>
         </div>
