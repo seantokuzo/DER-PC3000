@@ -3,6 +3,7 @@ import DrumPads from './components/DrumPads'
 import Controls from './components/Controls'
 import MainMenu from './components/MainMenu'
 import ClapsMenu from "./components/submenu-components/ClapsMenu"
+import FunMenu from './components/submenu-components/FunMenu'
 import sounds from './data/sounds.js'
 import crackerjap from "./images/thecrackerjaps-anim-nobck.png"
 // import stupidBank from "./data/stupid-bank.js"
@@ -101,7 +102,7 @@ function App() {
     document.addEventListener('keydown', handleKeys)
 
     return function () {
-      console.log("Clean up after YO SELF")
+      // console.log("Clean up after YO SELF")
       document.removeEventListener('keydown', handleKeys)
     }
   }, [])
@@ -109,24 +110,23 @@ function App() {
   //HANDLE MOUSE CLICK TRIGGER
   function triggerSample(e) {
     setCurrentPad(...myPads.filter(obj => obj.key === e.target.innerText.toUpperCase()))
-    console.log(currentPad)
     const mySample = document.getElementById(e.target.innerText.toUpperCase())
     mySample.currentTime = 0;
     mySample.play()
-      .then(() => console.log('x'))
-      .catch(() => console.log("y"))
+    .then(() => console.log('x'))
+    .catch(() => console.log("y"))
   }
-
+  
   function exitMainMenu() {
     setMainMenu(false)
   }
-
+  
   function showMainMenu() {
     if (currentPad.key) {
       setMainMenu(true)
     } else return
   }
-
+  
   function handleTypeClick(e) {
     console.log("Show that submenu")
     setMainMenu(false)
@@ -150,21 +150,7 @@ function App() {
       setVfxMenu(true)
     } else return
   }
-
-  //TRYING TO UPDATE MYPADS TO INCLUDE CURRENT PAD BUT NOT USING UPDATED CURRENT PAD
-  //AND ALSO NOT REPLACING THAT PAD BUT ADDING A DUPLICATE AT INDEX OF CURRENT PAD
-  // function updatePad() {
-  //   const sliceIndex = myPads.map((pad, ind) => {
-  //     if (pad.key === currentPad.key) {
-  //       return ind
-  //     } else return false
-  //   }).filter(item => item !== false)[0]
-  //   console.log(sliceIndex)
-  //   setMyPads(prevMyPads => (
-  //     prevMyPads.slice(0, sliceIndex).concat(currentPad).concat(prevMyPads.slice(sliceIndex))
-  //   ))
-  // }
-
+  
   function handleSampleSelection(e, str) {
     //EXIT MENUS WHEN SAMPLE SELECTED
     setClapsMenu(false)
@@ -177,20 +163,34 @@ function App() {
     setTracksMenu(false)
     setVfxMenu(false)
     //GATHER CLICKED ON SAMPLE OBJECT FROM SOUNDS ARRAY
-    const mySample = sounds
-      .filter(obj => obj.type === str)[0].samples
-      .filter(obj => obj.name === e.target.innerText)[0]
+    console.log(sounds.filter(obj => obj.type === str)[0].samples)
+    let mySample = sounds
+    .filter(obj => obj.type === str)[0].samples
+    .filter(obj => obj.name === e.target.innerText)[0]
     console.log(mySample)
+    let sliceIndex = myPads.map((pad, ind) => {
+      if (pad.key === currentPad.key) {
+        return ind
+      } else return false
+    }).filter(item => item !== false)[0]
+    console.log(sliceIndex)
     //UPDATE CURRENT PAD'S TYPE, NAME, AND SRC FROM SELECTED SAMPLE OBJECT
     setCurrentPad(prevCurrentPad => ({
       ...prevCurrentPad,
       ...mySample
     }))
     //TRRYING TO UPDATE MYPADS TO INCLUDE UPDATED CURRENT PAD
-    // updatePad()
+    setMyPads(prevMyPads => ([
+      ...prevMyPads.slice(0, sliceIndex),
+      {
+        ...currentPad,
+        ...mySample
+      },
+      ...(prevMyPads.slice(sliceIndex + 1))
+    ]))
   }
-  console.log(myPads)
-
+  // console.log(myPads)
+  
   // console.log(`claps: ${clapsMenu}`)
   // console.log(`fun: ${funMenu}`)
   // console.log(`hats: ${hatsMenu}`)
@@ -200,9 +200,10 @@ function App() {
   // console.log(`toms: ${tomsMenu}`)
   // console.log(`tracks: ${tracksMenu}`)
   // console.log(`vfx: ${vfxMenu}`)
-  console.log(currentPad)
-  return (
-    <main>
+  // console.log(currentPad)
+
+  const menusDisplay = (
+    <div>
       {mainMenu && <MainMenu
         sounds={sounds}
         exitMainMenu={exitMainMenu}
@@ -214,6 +215,17 @@ function App() {
         handleSampleSelection={handleSampleSelection}
       />
       }
+      {funMenu && <FunMenu
+        sounds={sounds}
+        handleSampleSelection={handleSampleSelection}
+      />
+      }
+    </div>
+  )
+
+  return (
+    <main>
+      {menusDisplay}
       <div id="drum-machine">
         <div className="drum-machine-top">
           <h2 id="dm-name">DER-PC3000</h2>
