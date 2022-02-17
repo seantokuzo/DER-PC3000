@@ -1,0 +1,53 @@
+.sounds-menu-page {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+}
+
+.sounds-menu-div {
+    width: 500px;
+
+    text-align: center;
+    background-color: black;
+    border: 5px solid var(--pad-dark);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 5px rgb(0, 0, 0);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    color: white;
+}
+
+.sounds-menu-type {
+    padding: 10px 30px;
+}
+
+.sounds-menu-type:hover {
+    cursor: pointer;
+    color: #55e76d;
+}
+
+#exit-sounds-menu {
+    width: 200px;
+    height: 50px;
+    margin-top: 5%;
+    margin-left: 150px;
+    
+    font-family: 'Orbitron';
+    font-size: 30px;
+    color: white;
+    
+    background-color: black;
+    border: 5px solid var(--pad-dark);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 5px rgb(0, 0, 0);
+}
+
+#exit-sounds-menu:hover {
+    cursor: pointer;
+    color: #55e76d;
+}

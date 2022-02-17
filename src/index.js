@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import './controls.css'
+import './sounds-menu.css'
 import App from './App'
 
 

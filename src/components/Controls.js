@@ -57,7 +57,10 @@ export default function Controls(props) {
                 {hiPassSlider}
                 {lowPassSlider}
             </div>
-            <div id="current-pad-display">
+            <div
+                id="current-pad-display"
+                onClick={props.showSoundsMenu}
+            >
                 <h6 id="display">{props.currentPad.sample}</h6>
             </div>
         </div>

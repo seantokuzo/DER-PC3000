@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react"
 import DrumPads from './components/DrumPads'
 import Controls from './components/Controls'
+import SoundsMenu from './components/SoundsMenu'
 import sounds from './data/sounds.js'
 import crackerjap from "./images/thecrackerjaps-anim-nobck.png"
 // import stupidBank from "./data/stupid-bank.js"
 
 function App() {
-
-  const [currentPad, setCurrentPad] = React.useState({})
-  // console.log(currentPad)
-
-  const [myPads, setmyPads] = React.useState([
+  const [soundsMenu, setSoundsMenu] = useState(false)
+  console.log(showSoundsMenu)
+  const [currentPad, setCurrentPad] = useState({})
+  const [myPads, setmyPads] = useState([
     {
       key: 'Q',
       code: 'KeyQ',
@@ -71,8 +71,8 @@ function App() {
       key: 'C',
       code: 'KeyC',
       type: sounds[3].type,
-      sample: sounds[3].samples[1].name,
-      src: sounds[3].samples[1].src
+      sample: sounds[3].samples[2].name,
+      src: sounds[3].samples[2].src
     }
   ])
 
@@ -108,15 +108,38 @@ function App() {
       .catch(() => console.log("y"))
   }
 
+  function updatePadSample() {
+    console.log('please update')
+  }
+
+  function exitSoundsMenu() {
+    setSoundsMenu(false)
+  }
+
+  function showSoundsMenu() {
+    if (currentPad.key) {
+      setSoundsMenu(true)
+    } else return
+  }
+
   return (
     <main>
+      {soundsMenu && <SoundsMenu sounds={sounds} updatePadSample={updatePadSample} exitSoundsMenu={exitSoundsMenu} />}
       <div id="drum-machine">
         <div className="drum-machine-top">
           <h2 id="dm-name">DER-PC3000</h2>
           <img id="crackerjap" src="https://docs.google.com/uc?export=download&id=1KvBVSFp49yPd3qJcWKLBFad3M0N2rs2h" />
         </div>
-        <DrumPads myPads={myPads} triggerSample={triggerSample} currentPad={currentPad} />
-        <Controls currentPad={currentPad} myPads={myPads} />
+        <DrumPads
+          myPads={myPads}
+          triggerSample={triggerSample}
+          currentPad={currentPad}
+        />
+        <Controls
+          currentPad={currentPad}
+          myPads={myPads}
+          showSoundsMenu={showSoundsMenu}
+        />
       </div>
     </main>
   )

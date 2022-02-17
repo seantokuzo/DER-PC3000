@@ -49,6 +49,10 @@
   align-items: center;
 }
 
+#current-pad-display:hover {
+  cursor: pointer;
+}
+
 #display {
   margin: auto;
   font-size: 25px;
