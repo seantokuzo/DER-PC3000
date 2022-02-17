@@ -1,6 +1,5 @@
-import React, { useEffect } from "react"
+import React from "react"
 import Pad from "./Pad"
-import { nanoid } from 'nanoid'
 
 export default function DrumPads(props) {
 
@@ -9,11 +8,11 @@ export default function DrumPads(props) {
             key={obj.code}
             code={obj.code}
             currentPad={props.currentPad}
-            padNumber={ind + 1}
             source={obj.src}
             letter={obj.key}
-            sampleName={obj.sample}
             triggerSample={props.triggerSample}
+            // padNumber={ind + 1}
+            // sampleName={obj.name}
         />
     ))
 

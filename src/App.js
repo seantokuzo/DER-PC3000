@@ -9,7 +9,7 @@ import crackerjap from "./images/thecrackerjaps-anim-nobck.png"
 
 function App() {
   const [mainMenu, setMainMenu] = useState(false)
-  const [clapsMenu, setClapsMenu] = useState(true)
+  const [clapsMenu, setClapsMenu] = useState(false)
   const [funMenu, setFunMenu] = useState(false)
   const [hatsMenu, setHatsMenu] = useState(false)
   const [kicksMenu, setKicksMenu] = useState(false)
@@ -19,68 +19,68 @@ function App() {
   const [tracksMenu, setTracksMenu] = useState(false)
   const [vfxMenu, setVfxMenu] = useState(false)
   const [currentPad, setCurrentPad] = useState({})
-  const [myPads, setmyPads] = useState([
+  const [myPads, setMyPads] = useState([
     {
       key: 'Q',
       code: 'KeyQ',
       type: sounds[4].type,
-      sample: sounds[4].samples[0].name,
+      name: sounds[4].samples[0].name,
       src: sounds[4].samples[0].src
     },
     {
       key: 'W',
       code: 'KeyW',
       type: sounds[4].type,
-      sample: sounds[4].samples[1].name,
+      name: sounds[4].samples[1].name,
       src: sounds[4].samples[1].src
     },
     {
       key: 'E',
       code: 'KeyE',
       type: sounds[1].type,
-      sample: sounds[1].samples[1].name,
+      name: sounds[1].samples[1].name,
       src: sounds[1].samples[1].src
     },
     {
       key: 'A',
       code: 'KeyA',
       type: sounds[0].type,
-      sample: sounds[0].samples[0].name,
+      name: sounds[0].samples[0].name,
       src: sounds[0].samples[0].src
     },
     {
       key: 'S',
       code: 'KeyS',
       type: sounds[0].type,
-      sample: sounds[0].samples[2].name,
+      name: sounds[0].samples[2].name,
       src: sounds[0].samples[2].src
     },
     {
       key: 'D',
       code: 'KeyD',
       type: sounds[2].type,
-      sample: sounds[2].samples[2].name,
+      name: sounds[2].samples[2].name,
       src: sounds[2].samples[2].src
     },
     {
       key: 'Z',
       code: 'KeyZ',
       type: sounds[5].type,
-      sample: sounds[5].samples[4].name,
+      name: sounds[5].samples[4].name,
       src: sounds[5].samples[4].src
     },
     {
       key: 'X',
       code: 'KeyX',
       type: sounds[7].type,
-      sample: sounds[7].samples[3].name,
+      name: sounds[7].samples[3].name,
       src: sounds[7].samples[3].src
     },
     {
       key: 'C',
       code: 'KeyC',
       type: sounds[3].type,
-      sample: sounds[3].samples[2].name,
+      name: sounds[3].samples[2].name,
       src: sounds[3].samples[2].src
     }
   ])
@@ -90,7 +90,6 @@ function App() {
     function handleKeys(e) {
       if (myPads.some(obj => obj.code === e.code)) {
         setCurrentPad(myPads.filter(obj => obj.code === e.code)[0])
-        console.log(e.code)
         const sample = document.getElementById(e.code.slice(3))
         sample.currentTime = 0
         sample.play()
@@ -152,26 +151,67 @@ function App() {
     } else return
   }
 
-  console.log(`claps: ${clapsMenu}`)
-  console.log(`fun: ${funMenu}`)
-  console.log(`hats: ${hatsMenu}`)
-  console.log(`kicks: ${kicksMenu}`)
-  console.log(`percs: ${percsMenu}`)
-  console.log(`snares: ${snaresMenu}`)
-  console.log(`toms: ${tomsMenu}`)
-  console.log(`tracks: ${tracksMenu}`)
-  console.log(`vfx: ${vfxMenu}`)
+  //TRYING TO UPDATE MYPADS TO INCLUDE CURRENT PAD BUT NOT USING UPDATED CURRENT PAD
+  //AND ALSO NOT REPLACING THAT PAD BUT ADDING A DUPLICATE AT INDEX OF CURRENT PAD
+  // function updatePad() {
+  //   const sliceIndex = myPads.map((pad, ind) => {
+  //     if (pad.key === currentPad.key) {
+  //       return ind
+  //     } else return false
+  //   }).filter(item => item !== false)[0]
+  //   console.log(sliceIndex)
+  //   setMyPads(prevMyPads => (
+  //     prevMyPads.slice(0, sliceIndex).concat(currentPad).concat(prevMyPads.slice(sliceIndex))
+  //   ))
+  // }
 
+  function handleSampleSelection(e, str) {
+    //EXIT MENUS WHEN SAMPLE SELECTED
+    setClapsMenu(false)
+    setFunMenu(false)
+    setHatsMenu(false)
+    setKicksMenu(false)
+    setPercsMenu(false)
+    setKicksMenu(false)
+    setTomsMenu(false)
+    setTracksMenu(false)
+    setVfxMenu(false)
+    //GATHER CLICKED ON SAMPLE OBJECT FROM SOUNDS ARRAY
+    const mySample = sounds
+      .filter(obj => obj.type === str)[0].samples
+      .filter(obj => obj.name === e.target.innerText)[0]
+    console.log(mySample)
+    //UPDATE CURRENT PAD'S TYPE, NAME, AND SRC FROM SELECTED SAMPLE OBJECT
+    setCurrentPad(prevCurrentPad => ({
+      ...prevCurrentPad,
+      ...mySample
+    }))
+    //TRRYING TO UPDATE MYPADS TO INCLUDE UPDATED CURRENT PAD
+    // updatePad()
+  }
+  console.log(myPads)
+
+  // console.log(`claps: ${clapsMenu}`)
+  // console.log(`fun: ${funMenu}`)
+  // console.log(`hats: ${hatsMenu}`)
+  // console.log(`kicks: ${kicksMenu}`)
+  // console.log(`percs: ${percsMenu}`)
+  // console.log(`snares: ${snaresMenu}`)
+  // console.log(`toms: ${tomsMenu}`)
+  // console.log(`tracks: ${tracksMenu}`)
+  // console.log(`vfx: ${vfxMenu}`)
+  console.log(currentPad)
   return (
     <main>
       {mainMenu && <MainMenu
-          sounds={sounds}
-          exitMainMenu={exitMainMenu}
-          handleTypeClick={handleTypeClick}
-        />
+        sounds={sounds}
+        exitMainMenu={exitMainMenu}
+        handleTypeClick={handleTypeClick}
+      />
       }
       {clapsMenu && <ClapsMenu
         sounds={sounds}
+        handleSampleSelection={handleSampleSelection}
       />
       }
       <div id="drum-machine">
@@ -186,8 +226,8 @@ function App() {
         />
         <Controls
           currentPad={currentPad}
-          myPads={myPads}
           showMainMenu={showMainMenu}
+        // myPads={myPads}
         />
       </div>
     </main>
