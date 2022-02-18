@@ -32,7 +32,9 @@ function App() {
     type: '',
     name: '',
     src: '',
-    volume: 0.5
+    volume: 0.5,
+    hiPass: 0,
+    loPass: 1
   })
   const [myPads, setMyPads] = useState([
     {
@@ -41,7 +43,9 @@ function App() {
       type: sounds[4].type,
       name: sounds[4].samples[0].name,
       src: sounds[4].samples[0].src,
-      volume: 0.5
+      volume: 0.5,
+      hiPass: 0,
+      loPass: 1
     },
     {
       key: 'W',
@@ -49,7 +53,9 @@ function App() {
       type: sounds[4].type,
       name: sounds[4].samples[1].name,
       src: sounds[4].samples[1].src,
-      volume: 0.5
+      volume: 0.5,
+      hiPass: 0,
+      loPass: 1
     },
     {
       key: 'E',
@@ -57,7 +63,9 @@ function App() {
       type: sounds[1].type,
       name: sounds[1].samples[1].name,
       src: sounds[1].samples[1].src,
-      volume: 0.5
+      volume: 0.5,
+      hiPass: 0,
+      loPass: 1
     },
     {
       key: 'A',
@@ -65,7 +73,9 @@ function App() {
       type: sounds[0].type,
       name: sounds[0].samples[0].name,
       src: sounds[0].samples[0].src,
-      volume: 0.5
+      volume: 0.5,
+      hiPass: 0,
+      loPass: 1
     },
     {
       key: 'S',
@@ -73,7 +83,9 @@ function App() {
       type: sounds[0].type,
       name: sounds[0].samples[2].name,
       src: sounds[0].samples[2].src,
-      volume: 0.5
+      volume: 0.5,
+      hiPass: 0,
+      loPass: 1
     },
     {
       key: 'D',
@@ -81,7 +93,9 @@ function App() {
       type: sounds[2].type,
       name: sounds[2].samples[2].name,
       src: sounds[2].samples[2].src,
-      volume: 0.5
+      volume: 0.5,
+      hiPass: 0,
+      loPass: 1
     },
     {
       key: 'Z',
@@ -89,7 +103,9 @@ function App() {
       type: sounds[5].type,
       name: sounds[5].samples[4].name,
       src: sounds[5].samples[4].src,
-      volume: 0.5
+      volume: 0.5,
+      hiPass: 0,
+      loPass: 1
     },
     {
       key: 'X',
@@ -97,7 +113,9 @@ function App() {
       type: sounds[7].type,
       name: sounds[7].samples[3].name,
       src: sounds[7].samples[3].src,
-      volume: 0.5
+      volume: 0.5,
+      hiPass: 0,
+      loPass: 1
     },
     {
       key: 'C',
@@ -105,7 +123,9 @@ function App() {
       type: sounds[3].type,
       name: sounds[3].samples[2].name,
       src: sounds[3].samples[2].src,
-      volume: 0.5
+      volume: 0.5,
+      hiPass: 0,
+      loPass: 1
     }
   ])
 
@@ -278,8 +298,7 @@ function App() {
     }
   }
 
-  function resetVolume(e) {
-    console.log(e)
+  function resetVolume() {
     if (currentPad.code) {
       let sliceIndex = myPads.map((pad, ind) => {
         if (pad.key === currentPad.key) {
@@ -300,6 +319,102 @@ function App() {
       ]))
       const currentSound = document.getElementById(currentPad.key)
       currentSound.volume = 0.5
+    }
+  }
+
+  function adjustHiPass(e) {
+    if (currentPad.code) {
+      let sliceIndex = myPads.map((pad, ind) => {
+        if (pad.key === currentPad.key) {
+          return ind
+        } else return false
+      }).filter(item => item !== false)[0]
+      setCurrentPad(prevCurrentPad => ({
+        ...prevCurrentPad,
+        hiPass: e.target.value
+      }))
+      setMyPads(prevMyPads => ([
+        ...prevMyPads.slice(0, sliceIndex),
+        {
+          ...currentPad,
+          hiPass: e.target.value
+        },
+        ...(prevMyPads.slice(sliceIndex + 1))
+      ]))
+      // const currentSound = document.getElementById(currentPad.key)
+      // ADJUST THE ACTUAL FILTER ON THE SOUNDS HERE
+    }
+  }
+
+  function resetHiPass() {
+    if (currentPad.code) {
+      let sliceIndex = myPads.map((pad, ind) => {
+        if (pad.key === currentPad.key) {
+          return ind
+        } else return false
+      }).filter(item => item !== false)[0]
+      setCurrentPad(prevCurrentPad => ({
+        ...prevCurrentPad,
+        hiPass: 0
+      }))
+      setMyPads(prevMyPads => ([
+        ...prevMyPads.slice(0, sliceIndex),
+        {
+          ...currentPad,
+          hiPass: 0
+        },
+        ...(prevMyPads.slice(sliceIndex + 1))
+      ]))
+      // const currentSound = document.getElementById(currentPad.key)
+      // RESET ACTUAL FILTER ON SOUND HERE
+    }
+  }
+
+  function adjustLoPass(e) {
+    if (currentPad.code) {
+      let sliceIndex = myPads.map((pad, ind) => {
+        if (pad.key === currentPad.key) {
+          return ind
+        } else return false
+      }).filter(item => item !== false)[0]
+      setCurrentPad(prevCurrentPad => ({
+        ...prevCurrentPad,
+        loPass: e.target.value
+      }))
+      setMyPads(prevMyPads => ([
+        ...prevMyPads.slice(0, sliceIndex),
+        {
+          ...currentPad,
+          loPass: e.target.value
+        },
+        ...(prevMyPads.slice(sliceIndex + 1))
+      ]))
+      // const currentSound = document.getElementById(currentPad.key)
+      // ADJUST THE ACTUAL FILTER ON THE SOUNDS HERE
+    }
+  }
+
+  function resetLoPass() {
+    if (currentPad.code) {
+      let sliceIndex = myPads.map((pad, ind) => {
+        if (pad.key === currentPad.key) {
+          return ind
+        } else return false
+      }).filter(item => item !== false)[0]
+      setCurrentPad(prevCurrentPad => ({
+        ...prevCurrentPad,
+        loPass: 1
+      }))
+      setMyPads(prevMyPads => ([
+        ...prevMyPads.slice(0, sliceIndex),
+        {
+          ...currentPad,
+          loPass: 1
+        },
+        ...(prevMyPads.slice(sliceIndex + 1))
+      ]))
+      // const currentSound = document.getElementById(currentPad.key)
+      // RESET ACTUAL FILTER ON SOUND HERE
     }
   }
 
@@ -402,6 +517,10 @@ function App() {
           showMainMenu={showMainMenu}
           adjustVolume={adjustVolume}
           resetVolume={resetVolume}
+          adjustHiPass={adjustHiPass}
+          resetHiPass={resetHiPass}
+          adjustLoPass={adjustLoPass}
+          resetLoPass={resetLoPass}
         />
       </div>
     </main>

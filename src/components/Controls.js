@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useEffect } from "react"
 
 export default function Controls(props) {
+
     const volumeSlider = (
         <div className='volume-slider'>
             <input
@@ -13,7 +14,7 @@ export default function Controls(props) {
                 placeholder="25%"
                 value={props.currentPad.volume}
                 id="volume"
-            />
+                />
         </div>
     )
     const hiPassSlider = (
@@ -21,13 +22,14 @@ export default function Controls(props) {
             <input
                 max='1'
                 min='0'
-                // onChange={this.adjustVolume}
+                onChange={(event) => props.adjustHiPass(event)}
+                onDoubleClick={props.resetHiPass}
                 step='0.01'
                 type='range'
                 placeholder="25%"
-                // value='50%'
+                value={props.currentPad.hiPass}
                 id="volume"
-            />
+                />
         </div>
     )
     const lowPassSlider = (
@@ -35,15 +37,18 @@ export default function Controls(props) {
             <input
                 max='1'
                 min='0'
-                // onChange={this.adjustVolume}
+                onChange={(event) => props.adjustLoPass(event)}
+                onDoubleClick={props.resetLoPass}
                 step='0.01'
                 type='range'
                 placeholder="25%"
-                // value='50%'
+                value='readOnly'
+                value={props.currentPad.loPass}
                 id="volume"
             />
         </div>
     )
+
     // console.log(props.currentPad)
     return (
         <div className="controls-div">
@@ -54,9 +59,21 @@ export default function Controls(props) {
                 <h2 className="backwards">R</h2>
             </div>
             <div id='sliders-div'>
-                {volumeSlider}
+                <div className="slider-div">
+                    {volumeSlider}
+                    <p className="slider-value">{Math.ceil(props.currentPad.volume * 100)}</p>
+                    <p className="slider-label">VOL</p>
+                </div>
+                <div className="slider-div">
                 {hiPassSlider}
+                    <p className="slider-value">{Math.ceil(props.currentPad.hiPass * 100)}</p>
+                    <p className="slider-label">HiPass</p>
+                </div>
+                <div className="slider-div">
                 {lowPassSlider}
+                    <p className="slider-value">{Math.ceil(props.currentPad.loPass * 100)}</p>
+                    <p className="slider-label">LoPass</p>
+                </div>
             </div>
             <div
                 id="current-pad-display"
@@ -64,6 +81,6 @@ export default function Controls(props) {
             >
                 <h6 id="display">{props.currentPad.name}</h6>
             </div>
-        </div>
+        </div >
     )
 }
