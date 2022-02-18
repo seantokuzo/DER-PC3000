@@ -16,98 +16,7 @@ import defaultBank from './data/banks.js'
 // import stupidBank from "./data/stupid-bank.js"
 
 function App() {
-  // const defaultBank = [
-  //   {
-  //     key: 'Q',
-  //     code: 'KeyQ',
-  //     type: sounds[4].type,
-  //     name: sounds[4].samples[0].name,
-  //     src: sounds[4].samples[0].src,
-  //     volume: 0.5,
-  //     hiPass: 0,
-  //     loPass: 1
-  //   },
-  //   {
-  //     key: 'W',
-  //     code: 'KeyW',
-  //     type: sounds[4].type,
-  //     name: sounds[4].samples[1].name,
-  //     src: sounds[4].samples[1].src,
-  //     volume: 0.5,
-  //     hiPass: 0,
-  //     loPass: 1
-  //   },
-  //   {
-  //     key: 'E',
-  //     code: 'KeyE',
-  //     type: sounds[1].type,
-  //     name: sounds[1].samples[1].name,
-  //     src: sounds[1].samples[1].src,
-  //     volume: 0.5,
-  //     hiPass: 0,
-  //     loPass: 1
-  //   },
-  //   {
-  //     key: 'A',
-  //     code: 'KeyA',
-  //     type: sounds[0].type,
-  //     name: sounds[0].samples[0].name,
-  //     src: sounds[0].samples[0].src,
-  //     volume: 0.5,
-  //     hiPass: 0,
-  //     loPass: 1
-  //   },
-  //   {
-  //     key: 'S',
-  //     code: 'KeyS',
-  //     type: sounds[0].type,
-  //     name: sounds[0].samples[2].name,
-  //     src: sounds[0].samples[2].src,
-  //     volume: 0.5,
-  //     hiPass: 0,
-  //     loPass: 1
-  //   },
-  //   {
-  //     key: 'D',
-  //     code: 'KeyD',
-  //     type: sounds[2].type,
-  //     name: sounds[2].samples[2].name,
-  //     src: sounds[2].samples[2].src,
-  //     volume: 0.5,
-  //     hiPass: 0,
-  //     loPass: 1
-  //   },
-  //   {
-  //     key: 'Z',
-  //     code: 'KeyZ',
-  //     type: sounds[5].type,
-  //     name: sounds[5].samples[4].name,
-  //     src: sounds[5].samples[4].src,
-  //     volume: 0.5,
-  //     hiPass: 0,
-  //     loPass: 1
-  //   },
-  //   {
-  //     key: 'X',
-  //     code: 'KeyX',
-  //     type: sounds[7].type,
-  //     name: sounds[7].samples[3].name,
-  //     src: sounds[7].samples[3].src,
-  //     volume: 0.5,
-  //     hiPass: 0,
-  //     loPass: 1
-  //   },
-  //   {
-  //     key: 'C',
-  //     code: 'KeyC',
-  //     type: sounds[3].type,
-  //     name: sounds[3].samples[2].name,
-  //     src: sounds[3].samples[2].src,
-  //     volume: 0.5,
-  //     hiPass: 0,
-  //     loPass: 1
-  //   }
-  // ]
+  const [storedPads, setStoredPads] = useState(false)
   const [playable, setPlayable] = useState(true)
   const [mainMenu, setMainMenu] = useState(false)
   const [clapsMenu, setClapsMenu] = useState(false)
@@ -138,8 +47,17 @@ function App() {
     console.log('retrieving local pads')
     if (localPads[0].key) {
       setMyPads(localPads)
+      setStoredPads(true)
     } else return
   }, [])
+
+  useEffect(() => {
+    //NEED TO SET ALL SOUND VOLUMES TO localPads.volume
+    myPads.map(pad => {
+      const padSound = document.getElementById(pad.key)
+      padSound.volume = pad.volume
+    })
+  }, [storedPads])
 
   //UPDATE LOCALLY STORED MYPADS OBJECT ANYTIME UPDATED IN APP
   useEffect(() => {
