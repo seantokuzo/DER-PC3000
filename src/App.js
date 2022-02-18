@@ -12,10 +12,10 @@ import TomsMenu from "./components/submenu-components/TomsMenu"
 import TracksMenu from "./components/submenu-components/TracksMenu"
 import VfxMenu from "./components/submenu-components/VfxMenu"
 import sounds from './data/sounds.js'
-import crackerjap from "./images/thecrackerjaps-anim-nobck.png"
 // import stupidBank from "./data/stupid-bank.js"
 
 function App() {
+  const [playable, setPlayable] = useState(true)
   const [mainMenu, setMainMenu] = useState(false)
   const [clapsMenu, setClapsMenu] = useState(false)
   const [funMenu, setFunMenu] = useState(false)
@@ -26,77 +26,93 @@ function App() {
   const [tomsMenu, setTomsMenu] = useState(false)
   const [tracksMenu, setTracksMenu] = useState(false)
   const [vfxMenu, setVfxMenu] = useState(false)
-  const [currentPad, setCurrentPad] = useState({})
+  const [currentPad, setCurrentPad] = useState({
+    key: '',
+    code: '',
+    type: '',
+    name: '',
+    src: '',
+    volume: 0.5
+  })
   const [myPads, setMyPads] = useState([
     {
       key: 'Q',
       code: 'KeyQ',
       type: sounds[4].type,
       name: sounds[4].samples[0].name,
-      src: sounds[4].samples[0].src
+      src: sounds[4].samples[0].src,
+      volume: 0.5
     },
     {
       key: 'W',
       code: 'KeyW',
       type: sounds[4].type,
       name: sounds[4].samples[1].name,
-      src: sounds[4].samples[1].src
+      src: sounds[4].samples[1].src,
+      volume: 0.5
     },
     {
       key: 'E',
       code: 'KeyE',
       type: sounds[1].type,
       name: sounds[1].samples[1].name,
-      src: sounds[1].samples[1].src
+      src: sounds[1].samples[1].src,
+      volume: 0.5
     },
     {
       key: 'A',
       code: 'KeyA',
       type: sounds[0].type,
       name: sounds[0].samples[0].name,
-      src: sounds[0].samples[0].src
+      src: sounds[0].samples[0].src,
+      volume: 0.5
     },
     {
       key: 'S',
       code: 'KeyS',
       type: sounds[0].type,
       name: sounds[0].samples[2].name,
-      src: sounds[0].samples[2].src
+      src: sounds[0].samples[2].src,
+      volume: 0.5
     },
     {
       key: 'D',
       code: 'KeyD',
       type: sounds[2].type,
       name: sounds[2].samples[2].name,
-      src: sounds[2].samples[2].src
+      src: sounds[2].samples[2].src,
+      volume: 0.5
     },
     {
       key: 'Z',
       code: 'KeyZ',
       type: sounds[5].type,
       name: sounds[5].samples[4].name,
-      src: sounds[5].samples[4].src
+      src: sounds[5].samples[4].src,
+      volume: 0.5
     },
     {
       key: 'X',
       code: 'KeyX',
       type: sounds[7].type,
       name: sounds[7].samples[3].name,
-      src: sounds[7].samples[3].src
+      src: sounds[7].samples[3].src,
+      volume: 0.5
     },
     {
       key: 'C',
       code: 'KeyC',
       type: sounds[3].type,
       name: sounds[3].samples[2].name,
-      src: sounds[3].samples[2].src
+      src: sounds[3].samples[2].src,
+      volume: 0.5
     }
   ])
 
   //HANDLE KEYBOARD TRIGGER
   useEffect(() => {
     function handleKeys(e) {
-      if (myPads.some(obj => obj.code === e.code)) {
+      if ((myPads.some(obj => obj.code === e.code)) && playable) {
         setCurrentPad(myPads.filter(obj => obj.code === e.code)[0])
         console.log(myPads)
         console.log(currentPad)
@@ -118,24 +134,28 @@ function App() {
 
   //HANDLE MOUSE CLICK TRIGGER
   function triggerSample(e) {
-    setCurrentPad(...myPads.filter(obj => obj.key === e.target.innerText.toUpperCase()))
-    const mySample = document.getElementById(e.target.innerText.toUpperCase())
-    mySample.currentTime = 0;
-    mySample.play()
-    .then(() => console.log('x'))
-    .catch(() => console.log("y"))
+    if (playable) {
+      setCurrentPad(...myPads.filter(obj => obj.key === e.target.innerText.toUpperCase()))
+      const mySample = document.getElementById(e.target.innerText.toUpperCase())
+      mySample.currentTime = 0;
+      mySample.play()
+        .then(() => console.log('x'))
+        .catch(() => console.log("y"))
+    }
   }
-  
+
   function exitMainMenu() {
     setMainMenu(false)
+    setPlayable(true)
   }
-  
+
   function showMainMenu() {
     if (currentPad.key) {
       setMainMenu(true)
+      setPlayable(false)
     } else return
   }
-  
+
   function handleTypeClick(e) {
     setMainMenu(false)
     if (e.target.innerText === 'claps') {
@@ -158,7 +178,7 @@ function App() {
       setVfxMenu(true)
     } else return
   }
-  
+
   function handleSampleSelection(e, str) {
     //EXIT MENUS WHEN SAMPLE SELECTED
     setClapsMenu(false)
@@ -170,10 +190,11 @@ function App() {
     setTomsMenu(false)
     setTracksMenu(false)
     setVfxMenu(false)
+    setPlayable(true)
     //GATHER CLICKED ON SAMPLE OBJECT FROM SOUNDS ARRAY
     let mySample = sounds
-    .filter(obj => obj.type === str)[0].samples
-    .filter(obj => obj.name === e.target.innerText)[0]
+      .filter(obj => obj.type === str)[0].samples
+      .filter(obj => obj.name === e.target.innerText)[0]
     let sliceIndex = myPads.map((pad, ind) => {
       if (pad.key === currentPad.key) {
         return ind
@@ -194,7 +215,7 @@ function App() {
       ...(prevMyPads.slice(sliceIndex + 1))
     ]))
   }
-  
+
   console.log(myPads)
   console.log(currentPad)
   // console.log(`claps: ${clapsMenu}`)
@@ -230,6 +251,56 @@ function App() {
     setTomsMenu(false)
     setTracksMenu(false)
     setVfxMenu(false)
+    setPlayable(true)
+  }
+
+  function adjustVolume(e) {
+    if (currentPad.code) {
+      let sliceIndex = myPads.map((pad, ind) => {
+        if (pad.key === currentPad.key) {
+          return ind
+        } else return false
+      }).filter(item => item !== false)[0]
+      setCurrentPad(prevCurrentPad => ({
+        ...prevCurrentPad,
+        volume: e.target.value
+      }))
+      setMyPads(prevMyPads => ([
+        ...prevMyPads.slice(0, sliceIndex),
+        {
+          ...currentPad,
+          volume: e.target.value
+        },
+        ...(prevMyPads.slice(sliceIndex + 1))
+      ]))
+      const currentSound = document.getElementById(currentPad.key)
+      currentSound.volume = e.target.value
+    }
+  }
+
+  function resetVolume(e) {
+    console.log(e)
+    if (currentPad.code) {
+      let sliceIndex = myPads.map((pad, ind) => {
+        if (pad.key === currentPad.key) {
+          return ind
+        } else return false
+      }).filter(item => item !== false)[0]
+      setCurrentPad(prevCurrentPad => ({
+        ...prevCurrentPad,
+        volume: 0.5
+      }))
+      setMyPads(prevMyPads => ([
+        ...prevMyPads.slice(0, sliceIndex),
+        {
+          ...currentPad,
+          volume: 0.5
+        },
+        ...(prevMyPads.slice(sliceIndex + 1))
+      ]))
+      const currentSound = document.getElementById(currentPad.key)
+      currentSound.volume = 0.5
+    }
   }
 
   const menusDisplay = (
@@ -315,7 +386,11 @@ function App() {
       <div id="drum-machine">
         <div className="drum-machine-top">
           <h2 id="dm-name">DER-PC3000</h2>
-          <img id="crackerjap" src="https://docs.google.com/uc?export=download&id=1KvBVSFp49yPd3qJcWKLBFad3M0N2rs2h" />
+          <img
+            id="crackerjap"
+            src="https://docs.google.com/uc?export=download&id=1KvBVSFp49yPd3qJcWKLBFad3M0N2rs2h"
+            alt="crackerjaps logo"
+          />
         </div>
         <DrumPads
           myPads={myPads}
@@ -325,7 +400,8 @@ function App() {
         <Controls
           currentPad={currentPad}
           showMainMenu={showMainMenu}
-        // myPads={myPads}
+          adjustVolume={adjustVolume}
+          resetVolume={resetVolume}
         />
       </div>
     </main>

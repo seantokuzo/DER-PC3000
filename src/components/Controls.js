@@ -6,11 +6,12 @@ export default function Controls(props) {
             <input
                 max='1'
                 min='0'
-                // onChange={this.adjustVolume}
+                onChange={(event) => props.adjustVolume(event)}
+                onDoubleClick={(event) => props.resetVolume(event)}
                 step='0.01'
                 type='range'
                 placeholder="25%"
-                // value='50%'
+                value={props.currentPad.volume}
                 id="volume"
             />
         </div>
