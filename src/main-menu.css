@@ -1,13 +1,16 @@
 .sounds-menu-page {
     position: absolute;
-    top: 35%;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .sounds-menu-div {
-    width: 500px;
+    min-width: 200px;
 
     text-align: center;
     background-color: black;
@@ -35,7 +38,6 @@
     width: 200px;
     height: 50px;
     margin-top: 5%;
-    margin-left: 150px;
     
     font-family: 'Orbitron';
     font-size: 30px;
@@ -59,8 +61,4 @@
 .sample-sub-div:hover {
     cursor: pointer;
     color: var(--menu-red);
-}
-
-.sample-sub {
-
 }

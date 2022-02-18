@@ -1,0 +1,115 @@
+.drum-pads-div {
+  grid-row: 2 / 3;
+  grid-column: 1 / 4;
+
+  background-color: #252424;
+  border: 5px solid black;
+  border-radius: 10px;
+  padding: 5px 7px 7px 5px;
+  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.drum-pad {
+  grid-column: span 1;
+  grid-row: span 1;
+  min-width: 10px;
+  min-height: 100px;
+
+  background-color: var(--pad);
+
+  border: 2px solid var(--pad-dark);
+  border-radius: 13px;
+
+  text-align: center;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: .1fr, 1fr, 1fr, .1fr;
+
+  box-shadow: 2px 2px 0px 0px var(--pad-dark);
+}
+
+.drum-pad:hover {
+  cursor: pointer;
+}
+
+.drum-pad:active {
+  background-color: var(--menu-red);
+  box-shadow: 0px 0px 20px -5px var(--menu-red);
+  /* box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7); */
+}
+
+.active {
+  -webkit-animation: padactive .2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: padactive .2s; /* Firefox < 16 */
+  -ms-animation: padactive .2s; /* Internet Explorer */
+  -o-animation: padactive .2s; /* Opera < 12.1 */
+  animation: padactive .2s;
+}
+
+@keyframes padactive {
+    from {
+      background-color: var(--menu-red);
+      box-shadow: 0px 0px 20px -5px var(--menu-red);
+    }
+    to {
+      background-color: var(--pad);
+      box-shadow: 2px 2px 0px 0px var(--pad-dark);
+    }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes padactive {
+    from {
+      background-color: var(--menu-red);
+      box-shadow: 0px 0px 20px -5px var(--menu-red);
+    }
+    to {
+      background-color: var(--pad);
+      box-shadow: 2px 2px 0px 0px var(--pad-dark);
+    }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes padactive {
+    from {
+      background-color: var(--menu-red);
+      box-shadow: 0px 0px 20px -5px var(--menu-red);
+    }
+    to {
+      background-color: var(--pad);
+      box-shadow: 2px 2px 0px 0px var(--pad-dark);
+    }
+}
+
+/* Internet Explorer */
+@-ms-keyframes padactive {
+    from {
+      background-color: var(--menu-red);
+      box-shadow: 0px 0px 20px -5px var(--menu-red);
+    }
+    to {
+      background-color: var(--pad);
+      box-shadow: 2px 2px 0px 0px var(--pad-dark);
+    }
+}
+
+.pad-letter {
+  grid-row: 2 / 3;
+
+  margin: 0;
+  
+}
+
+.pad-sample-name {
+  grid-row: 3 / 4;
+
+  margin: 10px 0 0;
+
+  font-size: .8em;
+  font-weight: 600;
+}

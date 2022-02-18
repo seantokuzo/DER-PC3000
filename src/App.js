@@ -16,7 +16,7 @@ import crackerjap from "./images/thecrackerjaps-anim-nobck.png"
 // import stupidBank from "./data/stupid-bank.js"
 
 function App() {
-  const [mainMenu, setMainMenu] = useState(false)
+  const [mainMenu, setMainMenu] = useState(true)
   const [clapsMenu, setClapsMenu] = useState(false)
   const [funMenu, setFunMenu] = useState(false)
   const [hatsMenu, setHatsMenu] = useState(false)
@@ -135,7 +135,6 @@ function App() {
   }
   
   function handleTypeClick(e) {
-    console.log(e.target.innerText === 'kicks')
     setMainMenu(false)
     if (e.target.innerText === 'claps') {
       setClapsMenu(true)
@@ -170,17 +169,14 @@ function App() {
     setTracksMenu(false)
     setVfxMenu(false)
     //GATHER CLICKED ON SAMPLE OBJECT FROM SOUNDS ARRAY
-    console.log(sounds.filter(obj => obj.type === str)[0].samples)
     let mySample = sounds
     .filter(obj => obj.type === str)[0].samples
     .filter(obj => obj.name === e.target.innerText)[0]
-    console.log(mySample)
     let sliceIndex = myPads.map((pad, ind) => {
       if (pad.key === currentPad.key) {
         return ind
       } else return false
     }).filter(item => item !== false)[0]
-    console.log(sliceIndex)
     //UPDATE CURRENT PAD'S TYPE, NAME, AND SRC FROM SELECTED SAMPLE OBJECT
     setCurrentPad(prevCurrentPad => ({
       ...prevCurrentPad,
@@ -196,18 +192,43 @@ function App() {
       ...(prevMyPads.slice(sliceIndex + 1))
     ]))
   }
-  // console.log(myPads)
+  console.log(myPads)
+  console.log(currentPad)
   
   // console.log(`claps: ${clapsMenu}`)
   // console.log(`fun: ${funMenu}`)
   // console.log(`hats: ${hatsMenu}`)
-  console.log(`kicks: ${kicksMenu}`)
+  // console.log(`kicks: ${kicksMenu}`)
   // console.log(`percs: ${percsMenu}`)
-  console.log(`snares: ${snaresMenu}`)
+  // console.log(`snares: ${snaresMenu}`)
   // console.log(`toms: ${tomsMenu}`)
   // console.log(`tracks: ${tracksMenu}`)
   // console.log(`vfx: ${vfxMenu}`)
-  // console.log(currentPad)
+
+  function subMenuBack() {
+    setMainMenu(true)
+    setClapsMenu(false)
+    setFunMenu(false)
+    setHatsMenu(false)
+    setKicksMenu(false)
+    setPercsMenu(false)
+    setSnaresMenu(false)
+    setTomsMenu(false)
+    setTracksMenu(false)
+    setVfxMenu(false)
+  }
+
+  function subMenuExit() {
+    setClapsMenu(false)
+    setFunMenu(false)
+    setHatsMenu(false)
+    setKicksMenu(false)
+    setPercsMenu(false)
+    setSnaresMenu(false)
+    setTomsMenu(false)
+    setTracksMenu(false)
+    setVfxMenu(false)
+  }
 
   const menusDisplay = (
     <div>
@@ -215,42 +236,72 @@ function App() {
         sounds={sounds}
         exitMainMenu={exitMainMenu}
         handleTypeClick={handleTypeClick}
+        subMenuBack={subMenuBack}
+        subMenuExit={subMenuExit}
       />
       }
       {clapsMenu && <ClapsMenu
         sounds={sounds}
         handleSampleSelection={handleSampleSelection}
+        subMenuBack={subMenuBack}
+        subMenuExit={subMenuExit}
       />
       }
       {funMenu && <FunMenu
         sounds={sounds}
         handleSampleSelection={handleSampleSelection}
+        subMenuBack={subMenuBack}
+        subMenuExit={subMenuExit}
       />
       }
       {hatsMenu && <HatsMenu
         sounds={sounds}
         handleSampleSelection={handleSampleSelection}
+        subMenuBack={subMenuBack}
+        subMenuExit={subMenuExit}
       />
       }
       {kicksMenu && <KicksMenu
         sounds={sounds}
         handleSampleSelection={handleSampleSelection}
+        subMenuBack={subMenuBack}
+        subMenuExit={subMenuExit}
       />
       }
       {percsMenu && <PercsMenu
         sounds={sounds}
         handleSampleSelection={handleSampleSelection}
+        subMenuBack={subMenuBack}
+        subMenuExit={subMenuExit}
       />
       }
       {snaresMenu && <SnaresMenu
         sounds={sounds}
         handleSampleSelection={handleSampleSelection}
+        subMenuBack={subMenuBack}
+        subMenuExit={subMenuExit}
       />
       }
 
       {tomsMenu && <TomsMenu
         sounds={sounds}
         handleSampleSelection={handleSampleSelection}
+        subMenuBack={subMenuBack}
+        subMenuExit={subMenuExit}
+      />
+      }
+      {tracksMenu && <TracksMenu
+        sounds={sounds}
+        handleSampleSelection={handleSampleSelection}
+        subMenuBack={subMenuBack}
+        subMenuExit={subMenuExit}
+      />
+      }
+      {vfxMenu && <VfxMenu
+        sounds={sounds}
+        handleSampleSelection={handleSampleSelection}
+        subMenuBack={subMenuBack}
+        subMenuExit={subMenuExit}
       />
       }
     </div>
