@@ -16,7 +16,7 @@ import crackerjap from "./images/thecrackerjaps-anim-nobck.png"
 // import stupidBank from "./data/stupid-bank.js"
 
 function App() {
-  const [mainMenu, setMainMenu] = useState(true)
+  const [mainMenu, setMainMenu] = useState(false)
   const [clapsMenu, setClapsMenu] = useState(false)
   const [funMenu, setFunMenu] = useState(false)
   const [hatsMenu, setHatsMenu] = useState(false)
@@ -98,6 +98,8 @@ function App() {
     function handleKeys(e) {
       if (myPads.some(obj => obj.code === e.code)) {
         setCurrentPad(myPads.filter(obj => obj.code === e.code)[0])
+        console.log(myPads)
+        console.log(currentPad)
         const sample = document.getElementById(e.code.slice(3))
         sample.currentTime = 0
         sample.play()
@@ -112,7 +114,7 @@ function App() {
       // console.log("Clean up after YO SELF")
       document.removeEventListener('keydown', handleKeys)
     }
-  }, [])
+  }, [currentPad])
 
   //HANDLE MOUSE CLICK TRIGGER
   function triggerSample(e) {
@@ -182,7 +184,7 @@ function App() {
       ...prevCurrentPad,
       ...mySample
     }))
-    //TRRYING TO UPDATE MYPADS TO INCLUDE UPDATED CURRENT PAD
+    //UPDATE MYPADS WITH NEW SOUNDS AT CURRENTLY SELECTED PAD
     setMyPads(prevMyPads => ([
       ...prevMyPads.slice(0, sliceIndex),
       {
@@ -192,9 +194,9 @@ function App() {
       ...(prevMyPads.slice(sliceIndex + 1))
     ]))
   }
+  
   console.log(myPads)
   console.log(currentPad)
-  
   // console.log(`claps: ${clapsMenu}`)
   // console.log(`fun: ${funMenu}`)
   // console.log(`hats: ${hatsMenu}`)
