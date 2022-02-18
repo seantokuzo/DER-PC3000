@@ -17,8 +17,6 @@
 
 .controls-title-div {
   display: flex;
-  
-  
 }
 
 .controls-title {
@@ -36,7 +34,6 @@
 
 
 #sliders-div {
-  border: 1px solid black;
   width: 95%;
   height: 45%;
   display: flex;
@@ -48,16 +45,18 @@
 }
 
 .slider-div {
-  height: 100%;
   
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .slider-value {
-  margin: 40px 0 0;
-  border: 1px solid green;
+  width: 90%;
+
   color: var(--menu-red);
   background-color: black;
+  
+  margin: 40px auto 0;
+  /* border: 1px solid green; */
 }
 
 .slider-label {
@@ -138,9 +137,9 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 3px;
   background: var(--pad);
   cursor: pointer;
-  margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
-  box-shadow: 1.5px -1.5px 0px 0px var(--pad-dark);
+  margin-top: -15px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  /* box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; */
+  /* box-shadow: -1px 1px 0px 0px var(--pad-dark); */
 }
 
 /* All the same stuff for Firefox */
@@ -152,7 +151,7 @@ input[type=range]::-moz-range-thumb {
   border-radius: 3px;
   background: var(--pad);
   cursor: pointer;
-  box-shadow: 1.5px -1.5px 0px 0px var(--pad-dark);
+  box-shadow: 1px 1px 0px 0px var(--pad-dark);
 }
 
 /* All the same stuff for IE */
@@ -164,7 +163,7 @@ input[type=range]::-ms-thumb {
   border-radius: 3px;
   background: var(--pad);
   cursor: pointer;
-  box-shadow: 1.5px -1.5px 0px 0px var(--pad-dark);
+  box-shadow: 1px 1px 0px 0px var(--pad-dark);
 }
 
 input[type=range]::-webkit-slider-runnable-track {
