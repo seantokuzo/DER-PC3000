@@ -3,7 +3,7 @@ import React, { useEffect } from "react"
 export default function Controls(props) {
 
     useEffect(() => {
-        console.log("Rerender Me Please")
+        console.log("Rerender")
     }, [props.currentPad])
 
     const volumeSlider = (
@@ -49,7 +49,6 @@ export default function Controls(props) {
         </div>
     )
 
-    // console.log(props.currentPad)
     return (
         <div className="controls-div">
             <div className="controls-title-div">

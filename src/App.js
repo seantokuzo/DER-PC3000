@@ -45,7 +45,6 @@ function App() {
   useEffect(() => {
     const localPads = JSON.parse(localStorage.getItem('myPads'))
     if (localPads) {
-      console.log('retrieving local pads')
       setMyPads(localPads)
       setStoredPads(true)
     } else return
@@ -56,16 +55,18 @@ function App() {
     myPads.map(pad => {
       const padSound = document.getElementById(pad.key)
       padSound.volume = pad.volume
+      return ''
     })
-  }, [storedPads])
-
+  }, [storedPads, myPads])
+  
   //RESET ALL VOLUMES WHEN RESETTING TO DEFAULT BANK - LOGO CLICK
   useEffect(() => {
     myPads.map(pad => {
       const padSound = document.getElementById(pad.key)
       padSound.volume = pad.volume
+      return ''
     })
-  }, [resetPads])
+  }, [resetPads, myPads])
 
   //UPDATE LOCALLY STORED MYPADS OBJECT ANYTIME UPDATED IN APP
   useEffect(() => {
@@ -81,18 +82,17 @@ function App() {
         const mySample = document.getElementById(e.code.slice(3))
         mySample.currentTime = 0
         mySample.play()
-          .then(() => console.log('x'))
-          .catch(() => console.log('y'))
+          .then(() => console.log('Sample Retrieved'))
+          .catch(() => console.log('Could not retrieve sample in time'))
       } else return
     }
 
     document.addEventListener('keydown', handleKeys)
 
     return function () {
-      // console.log("Clean up after YO SELF")
       document.removeEventListener('keydown', handleKeys)
     }
-  }, [myPads, currentPad])
+  }, [myPads, currentPad, playable])
 
   //HANDLE MOUSE CLICK TRIGGER
   function triggerSample(e) {
@@ -101,8 +101,8 @@ function App() {
       const mySample = document.getElementById(e.target.innerText.toUpperCase())
       mySample.currentTime = 0;
       mySample.play()
-        .then(() => console.log('x'))
-        .catch(() => console.log("y"))
+        .then(() => console.log('Sample Retrieved'))
+        .catch(() => console.log('Could not retrieve sample in time'))
     }
   }
 
@@ -363,18 +363,6 @@ function App() {
     setPlayable(true)
     setResetPads(prevReset => !prevReset)
   }
-
-  // console.log(myPads)
-  console.log(currentPad)
-  // console.log(`claps: ${clapsMenu}`)
-  // console.log(`fun: ${funMenu}`)
-  // console.log(`hats: ${hatsMenu}`)
-  // console.log(`kicks: ${kicksMenu}`)
-  // console.log(`percs: ${percsMenu}`)
-  // console.log(`snares: ${snaresMenu}`)
-  // console.log(`toms: ${tomsMenu}`)
-  // console.log(`tracks: ${tracksMenu}`)
-  // console.log(`vfx: ${vfxMenu}`)
 
   const menusDisplay = (
     <div className="all-menus-container">
