@@ -16,6 +16,7 @@ import defaultBank from './data/banks.js'
 // import stupidBank from "./data/stupid-bank.js"
 
 function App() {
+  const [resetPads, setResetPads] = useState(false)
   const [storedPads, setStoredPads] = useState(false)
   const [playable, setPlayable] = useState(true)
   const [mainMenu, setMainMenu] = useState(false)
@@ -43,28 +44,32 @@ function App() {
   //IF THERE ARE PADS STORED IN LOCAL STORAGE GET THEM AND SET MYPADS TO THEM
   useEffect(() => {
     const localPads = JSON.parse(localStorage.getItem('myPads'))
-    console.log(localPads)
-    console.log('retrieving local pads')
     if (localPads[0].key) {
+      console.log('retrieving local pads')
       setMyPads(localPads)
       setStoredPads(true)
     } else return
   }, [])
 
+  //IF PULLING LOCALLY STORED PADS, SET ALL SOUND VOLUMES AFTER UPDATING MYPADS
   useEffect(() => {
-    //NEED TO SET ALL SOUND VOLUMES TO localPads.volume
     myPads.map(pad => {
       const padSound = document.getElementById(pad.key)
       padSound.volume = pad.volume
     })
   }, [storedPads])
 
+  //RESET ALL VOLUMES WHEN RESETTING TO DEFAULT BANK - LOGO CLICK
+  useEffect(() => {
+    myPads.map(pad => {
+      const padSound = document.getElementById(pad.key)
+      padSound.volume = pad.volume
+    })
+  }, [resetPads])
+
   //UPDATE LOCALLY STORED MYPADS OBJECT ANYTIME UPDATED IN APP
   useEffect(() => {
     localStorage.setItem('myPads', JSON.stringify(myPads))
-    console.log("Am I setting local or WHAT?")
-    const checker = localStorage.getItem('myPads')
-    console.log(checker)
   }, [myPads])
 
   //HANDLE KEYBOARD TRIGGER
@@ -72,9 +77,9 @@ function App() {
     function handleKeys(e) {
       if ((myPads.some(obj => obj.code === e.code)) && playable) {
         setCurrentPad(myPads.filter(obj => obj.code === e.code)[0])
-        const sample = document.getElementById(e.code.slice(3))
-        sample.currentTime = 0
-        sample.play()
+        const mySample = document.getElementById(e.code.slice(3))
+        mySample.currentTime = 0
+        mySample.play()
           .then(() => console.log('x'))
           .catch(() => console.log('y'))
       } else return
@@ -86,7 +91,7 @@ function App() {
       // console.log("Clean up after YO SELF")
       document.removeEventListener('keydown', handleKeys)
     }
-  }, [currentPad])
+  }, [myPads, currentPad])
 
   //HANDLE MOUSE CLICK TRIGGER
   function triggerSample(e) {
@@ -342,8 +347,24 @@ function App() {
     }
   }
 
+  function resetDefaultBank() {
+    setMyPads(defaultBank)
+    setMainMenu(false)
+    setClapsMenu(false)
+    setFunMenu(false)
+    setHatsMenu(false)
+    setKicksMenu(false)
+    setPercsMenu(false)
+    setSnaresMenu(false)
+    setTomsMenu(false)
+    setTracksMenu(false)
+    setVfxMenu(false)
+    setPlayable(true)
+    setResetPads(prevReset => !prevReset)
+  }
+
   // console.log(myPads)
-  // console.log(currentPad)
+  console.log(currentPad)
   // console.log(`claps: ${clapsMenu}`)
   // console.log(`fun: ${funMenu}`)
   // console.log(`hats: ${hatsMenu}`)
@@ -441,6 +462,7 @@ function App() {
             id="crackerjap"
             src="https://docs.google.com/uc?export=download&id=1KvBVSFp49yPd3qJcWKLBFad3M0N2rs2h"
             alt="crackerjaps logo"
+            onClick={resetDefaultBank}
           />
         </div>
         <DrumPads

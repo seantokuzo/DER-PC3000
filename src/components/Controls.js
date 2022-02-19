@@ -2,6 +2,10 @@ import React, { useEffect } from "react"
 
 export default function Controls(props) {
 
+    useEffect(() => {
+        console.log("Rerender Me Please")
+    }, [props.currentPad])
+
     const volumeSlider = (
         <div className='volume-slider'>
             <input
@@ -11,7 +15,6 @@ export default function Controls(props) {
                 onDoubleClick={(event) => props.resetVolume(event)}
                 step='0.01'
                 type='range'
-                placeholder="25%"
                 value={props.currentPad.volume}
                 id="volume"
                 />
@@ -26,7 +29,6 @@ export default function Controls(props) {
                 onDoubleClick={props.resetHiPass}
                 step='0.01'
                 type='range'
-                placeholder="25%"
                 value={props.currentPad.hiPass}
                 id="volume"
                 />
@@ -41,8 +43,6 @@ export default function Controls(props) {
                 onDoubleClick={props.resetLoPass}
                 step='0.01'
                 type='range'
-                placeholder="25%"
-                value='readOnly'
                 value={props.currentPad.loPass}
                 id="volume"
             />
