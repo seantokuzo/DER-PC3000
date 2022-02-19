@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/DER-PC3000/static/css/main.eb89187b.css",
+    "main.js": "/DER-PC3000/static/js/main.442dced4.js",
+    "index.html": "/DER-PC3000/index.html",
+    "main.eb89187b.css.map": "/DER-PC3000/static/css/main.eb89187b.css.map",
+    "main.442dced4.js.map": "/DER-PC3000/static/js/main.442dced4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eb89187b.css",
+    "static/js/main.442dced4.js"
+  ]
+}
