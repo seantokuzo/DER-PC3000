@@ -11,8 +11,6 @@ export default function DrumPads(props) {
             source={obj.src}
             letter={obj.key}
             triggerSample={props.triggerSample}
-            // padNumber={ind + 1}
-            // sampleName={obj.name}
         />
     ))
 

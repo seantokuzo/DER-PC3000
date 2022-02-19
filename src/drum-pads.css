@@ -44,11 +44,11 @@
 }
 
 .active {
-  -webkit-animation: padactive .2s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: padactive .2s; /* Firefox < 16 */
-  -ms-animation: padactive .2s; /* Internet Explorer */
-  -o-animation: padactive .2s; /* Opera < 12.1 */
-  animation: padactive .2s;
+  -webkit-animation: padactive .3s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: padactive .3s; /* Firefox < 16 */
+  -ms-animation: padactive .3s; /* Internet Explorer */
+  -o-animation: padactive .3s; /* Opera < 12.1 */
+  animation: padactive .3s;
 }
 
 @keyframes padactive {

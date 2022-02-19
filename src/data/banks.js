@@ -77,7 +77,8 @@ const defaultBank = [
         src: "https://docs.google.com/uc?export=download&id=1gBRjYpYXT6MTA4pYI0vGVFKUdxTbqIof",
         volume: 0.5,
         hiPass: 0,
-        loPass: 1
+        loPass: 1,
+        active: false
     },
     {
         key: 'C',

@@ -77,6 +77,7 @@ function App() {
     function handleKeys(e) {
       if ((myPads.some(obj => obj.code === e.code)) && playable) {
         setCurrentPad(myPads.filter(obj => obj.code === e.code)[0])
+
         const mySample = document.getElementById(e.code.slice(3))
         mySample.currentTime = 0
         mySample.play()

@@ -62,17 +62,17 @@ export default function Controls(props) {
                 <div className="slider-div">
                     {volumeSlider}
                     <p className="slider-value">{Math.ceil(props.currentPad.volume * 100)}</p>
-                    <p className="slider-label">VOL</p>
+                    <p className="slider-label">Volume</p>
                 </div>
                 <div className="slider-div">
                 {hiPassSlider}
                     <p className="slider-value">{Math.ceil(props.currentPad.hiPass * 100)}</p>
-                    <p className="slider-label">HiPass</p>
+                    <p className="slider-label">LoCut</p>
                 </div>
                 <div className="slider-div">
                 {lowPassSlider}
                     <p className="slider-value">{Math.ceil(props.currentPad.loPass * 100)}</p>
-                    <p className="slider-label">LoPass</p>
+                    <p className="slider-label">HiCut</p>
                 </div>
             </div>
             <div
