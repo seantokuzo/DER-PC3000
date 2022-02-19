@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index-mb.css'
-import './drum-pads-mb.css'
-import './controls-mb.css'
-import './main-menu-mb.css'
-import './sub-menus-mb.css'
+import './desktop-styles/index.css'
+import './desktop-styles/drum-pads.css'
+import './desktop-styles/controls.css'
+import './desktop-styles/main-menu.css'
+import './desktop-styles/sub-menus.css'
 import App from './App'
 
 
