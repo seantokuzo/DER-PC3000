@@ -44,7 +44,7 @@ function App() {
   //IF THERE ARE PADS STORED IN LOCAL STORAGE GET THEM AND SET MYPADS TO THEM
   useEffect(() => {
     const localPads = JSON.parse(localStorage.getItem('myPads'))
-    if (localPads[0].key) {
+    if (localPads) {
       console.log('retrieving local pads')
       setMyPads(localPads)
       setStoredPads(true)
@@ -377,7 +377,7 @@ function App() {
   // console.log(`vfx: ${vfxMenu}`)
 
   const menusDisplay = (
-    <div>
+    <div className="all-menus-container">
       {mainMenu && <MainMenu
         sounds={sounds}
         exitMainMenu={exitMainMenu}
@@ -455,7 +455,7 @@ function App() {
 
   return (
     <main>
-      {menusDisplay}
+        {menusDisplay}
       <div id="drum-machine">
         <div className="drum-machine-top">
           <h2 id="dm-name">DER-PC3000</h2>

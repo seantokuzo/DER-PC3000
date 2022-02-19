@@ -3,14 +3,14 @@ import { nanoid } from "nanoid"
 
 export default function MainMenu(props) {
     const sampleTypes = (
-        <div className="sounds-menu-page">
-            <div className="sounds-menu-div">
+        <div className="main-menu-page">
+            <div className="main-menu-div">
                 {
                     props.sounds.map(obj =>
                     (
                         <div
                             key={nanoid()}
-                            className="sounds-menu-type"
+                            className="main-menu-type"
                             onClick={(event) => props.handleTypeClick(event)}
                         >
                             <h3>{obj.type}</h3>
@@ -18,7 +18,7 @@ export default function MainMenu(props) {
                     ))
                 }
             </div>
-            <button type="button" id="exit-sounds-menu" onClick={props.exitMainMenu}>Exit</button>
+            <button type="button" id="exit-main-menu" onClick={props.exitMainMenu}>Exit</button>
         </div>
     )
     return (
